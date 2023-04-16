@@ -1,10 +1,11 @@
 package iti.jets.service.dtos;
 
 import iti.jets.database.entities.Film;
-import iti.jets.database.entities.Language;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -15,7 +16,10 @@ import java.util.List;
  * A DTO for the {@link Film} entity
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class FilmDto implements Serializable {
+
     private Integer id;
     @Size(max = 128)
     @NotNull
@@ -32,13 +36,13 @@ public class FilmDto implements Serializable {
     private Integer length;
     @NotNull
     private BigDecimal replacementCost;
-    private List<FilmCategoryDto> filmCategoryList;
-    private List<FilmActorDto> filmActorList;
-    private List<InventoryDto> inventoryList;
     @Size(max = 5)
     private String rating;
     @Size(max = 54)
     private String specialFeatures;
     @NotNull
     private Instant lastUpdate;
+    private List<FilmCategoryDto> filmCategoryList;
+    private List<FilmActorDto> filmActorList;
+    private List<InventoryDto> inventoryList;
 }

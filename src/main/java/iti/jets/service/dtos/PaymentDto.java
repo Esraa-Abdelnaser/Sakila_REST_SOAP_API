@@ -2,7 +2,9 @@ package iti.jets.service.dtos;
 
 import iti.jets.database.entities.Payment;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -12,6 +14,8 @@ import java.time.Instant;
  * A DTO for the {@link Payment} entity
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PaymentDto implements Serializable {
     private Integer id;
     @NotNull

@@ -2,15 +2,20 @@ package iti.jets.service.dtos;
 
 import iti.jets.database.entities.Store;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * A DTO for the {@link Store} entity
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class StoreDto implements Serializable {
     private Integer id;
     @NotNull
@@ -19,4 +24,7 @@ public class StoreDto implements Serializable {
     private AddressDto address;
     @NotNull
     private Instant lastUpdate;
+    private List<StaffDto> staffList;
+    private List<InventoryDto> inventoryList;
+    private List<CustomerDto> customerList;
 }

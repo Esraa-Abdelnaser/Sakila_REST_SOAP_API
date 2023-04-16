@@ -3,15 +3,20 @@ package iti.jets.service.dtos;
 import iti.jets.database.entities.Category;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * A DTO for the {@link Category} entity
  */
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class CategoryDto implements Serializable {
     private Integer id;
     @Size(max = 25)
@@ -19,4 +24,5 @@ public class CategoryDto implements Serializable {
     private String name;
     @NotNull
     private Instant lastUpdate;
+    private List<FilmCategoryDto> filmCategoryList;
 }

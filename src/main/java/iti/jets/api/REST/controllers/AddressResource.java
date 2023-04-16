@@ -55,16 +55,8 @@ public class AddressResource {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(addressDto.getId()));
 
         if (optionalAddress.isPresent()) {
-            AddressDto existingAddress = optionalAddress.get();
-            existingAddress.setAddress(addressDto.getAddress());
-            existingAddress.setAddress2(addressDto.getAddress2());
-            existingAddress.setDistrict(addressDto.getDistrict());
-            existingAddress.setCity(addressDto.getCity());
-            existingAddress.setPostalCode(addressDto.getPostalCode());
-            existingAddress.setPhone(addressDto.getPhone());
-            existingAddress.setLastUpdate(addressDto.getLastUpdate());
-            addressServices.update(existingAddress);
-            return Response.ok(existingAddress).build();
+            addressServices.update(addressDto);
+            return Response.ok(addressDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

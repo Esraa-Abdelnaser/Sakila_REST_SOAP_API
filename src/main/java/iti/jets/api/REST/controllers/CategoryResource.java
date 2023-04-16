@@ -56,11 +56,8 @@ public class CategoryResource {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(CategoryDto.getId()));
 
         if (optionalCategory.isPresent()) {
-            CategoryDto existingCategory = optionalCategory.get();
-            existingCategory.setName(CategoryDto.getName());
-            existingCategory.setLastUpdate(CategoryDto.getLastUpdate());
-            categoryServices.update(existingCategory);
-            return Response.ok(existingCategory).build();
+            categoryServices.update(CategoryDto);
+            return Response.ok(CategoryDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

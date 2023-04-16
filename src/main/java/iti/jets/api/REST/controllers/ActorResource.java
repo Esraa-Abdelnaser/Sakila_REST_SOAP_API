@@ -54,12 +54,8 @@ public class ActorResource {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(actorDto.getId()));
 
         if (optionalActor.isPresent()) {
-            ActorDto existingActor = optionalActor.get();
-            existingActor.setFirstName(actorDto.getFirstName());
-            existingActor.setLastName(actorDto.getLastName());
-            existingActor.setLastUpdate(actorDto.getLastUpdate());
-            actorServices.update(existingActor);
-            return Response.ok(existingActor).build();
+            actorServices.update(actorDto);
+            return Response.ok(actorDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

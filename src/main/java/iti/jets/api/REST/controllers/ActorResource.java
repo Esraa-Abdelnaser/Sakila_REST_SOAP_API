@@ -75,6 +75,4 @@ public class ActorResource {
         }
         return Response.noContent().build();
     }
-
-
 }

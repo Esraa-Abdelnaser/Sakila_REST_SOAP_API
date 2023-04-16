@@ -13,7 +13,7 @@ import java.time.Instant;
  */
 @Data
 public class CategoryDto implements Serializable {
-    private Short id;
+    private Integer id;
     @Size(max = 25)
     @NotNull
     private String name;

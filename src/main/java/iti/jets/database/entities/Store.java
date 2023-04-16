@@ -2,10 +2,12 @@ package iti.jets.database.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.time.Instant;
 import java.util.List;
 
+@Data
 @Entity
 @Table(name = "store")
 public class Store {
@@ -28,45 +30,13 @@ public class Store {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "store", fetch = FetchType.LAZY)
     private List<Staff> staffList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "store", fetch = FetchType.LAZY)
     private List<Inventory> inventoryList;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "store", fetch = FetchType.LAZY)
     private List<Customer> customerList;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Staff getManagerStaff() {
-        return managerStaff;
-    }
-
-    public void setManagerStaff(Staff managerStaff) {
-        this.managerStaff = managerStaff;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public Instant getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Instant lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
 
 }

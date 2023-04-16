@@ -2,8 +2,11 @@ package iti.jets.database.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.time.Instant;
+
+@Data
 @Entity
 @Table(name = "film_actor")
 public class FilmActor {

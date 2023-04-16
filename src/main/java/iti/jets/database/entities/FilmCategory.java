@@ -2,8 +2,11 @@ package iti.jets.database.entities;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 
 import java.time.Instant;
+
+@Data
 @Entity
 @Table(name = "film_category")
 public class FilmCategory {
@@ -23,37 +26,5 @@ public class FilmCategory {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
-
-    public FilmCategoryId getId() {
-        return id;
-    }
-
-    public void setId(FilmCategoryId id) {
-        this.id = id;
-    }
-
-    public Film getFilm() {
-        return film;
-    }
-
-    public void setFilm(Film film) {
-        this.film = film;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public Instant getLastUpdate() {
-        return lastUpdate;
-    }
-
-    public void setLastUpdate(Instant lastUpdate) {
-        this.lastUpdate = lastUpdate;
-    }
 
 }

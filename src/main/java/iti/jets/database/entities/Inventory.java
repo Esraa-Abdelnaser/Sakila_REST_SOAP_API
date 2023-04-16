@@ -1,14 +1,15 @@
 package iti.jets.database.entities;
 
 import jakarta.persistence.*;
-import java.time.Instant;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
+import java.time.Instant;
 @Entity
 @Table(name = "inventory")
 public class Inventory {
     @Id
     @Column(name = "inventory_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull

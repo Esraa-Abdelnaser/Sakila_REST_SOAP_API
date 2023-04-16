@@ -2,10 +2,9 @@ package iti.jets.database.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
+
 import java.io.Serializable;
 import java.util.Objects;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 @Embeddable
 public class FilmCategoryId implements Serializable {
     private static final long serialVersionUID = -6983600894243244266L;

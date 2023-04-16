@@ -1,18 +1,17 @@
 package iti.jets.database.entities;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import java.time.Instant;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+
+import java.time.Instant;
 
 @Entity
 @Table(name = "language")
 public class Language {
     @Id
     @Column(name = "language_id", columnDefinition = "TINYINT UNSIGNED not null")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 20)

@@ -1,16 +1,17 @@
 package iti.jets.database.entities;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+
 import java.math.BigDecimal;
 import java.time.Instant;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "payment")
 public class Payment {
     @Id
     @Column(name = "payment_id", columnDefinition = "SMALLINT UNSIGNED not null")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotNull

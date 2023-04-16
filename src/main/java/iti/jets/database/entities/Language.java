@@ -5,13 +5,14 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "language")
 public class Language {
     @Id
     @Column(name = "language_id", columnDefinition = "TINYINT UNSIGNED not null")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Size(max = 20)
@@ -22,6 +23,12 @@ public class Language {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "language", fetch = FetchType.LAZY)
+    private List<Film> filmList;
+
+    @OneToMany(mappedBy = "originalLanguage", fetch = FetchType.LAZY)
+    private List<Film> filmList1;
 
     public Integer getId() {
         return id;

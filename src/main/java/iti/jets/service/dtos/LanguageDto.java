@@ -7,6 +7,7 @@ import lombok.Data;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.List;
 
 /**
  * A DTO for the {@link Language} entity
@@ -19,4 +20,5 @@ public class LanguageDto implements Serializable {
     private String name;
     @NotNull
     private Instant lastUpdate;
+    private List<FilmDto> filmList;
 }

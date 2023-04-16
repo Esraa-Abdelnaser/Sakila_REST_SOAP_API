@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.Instant;
+import java.util.List;
+
 @Entity
 @Table(name = "film")
 public class Film {
@@ -35,6 +37,7 @@ public class Film {
     @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
 
+    @NotNull
     @Column(name = "rental_duration", columnDefinition = "TINYINT UNSIGNED not null")
     private Short rentalDuration;
 
@@ -49,6 +52,7 @@ public class Film {
     @Column(name = "replacement_cost", nullable = false, precision = 5, scale = 2)
     private BigDecimal replacementCost;
 
+
     @Size(max = 5)
     @Column(name = "rating", length = 5)
     private String rating;
@@ -60,6 +64,14 @@ public class Film {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "film", fetch = FetchType.LAZY)
+    private List<FilmCategory> filmCategoryList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "film", fetch = FetchType.LAZY)
+    private List<FilmActor> filmActorList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "id", fetch = FetchType.LAZY)
+    private List<Inventory> inventoryList;
 
     public Integer getId() {
         return id;

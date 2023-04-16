@@ -39,6 +39,8 @@ public class Payment {
     @Column(name = "last_update")
     private Instant lastUpdate;
 
+
+
     public Integer getId() {
         return id;
     }

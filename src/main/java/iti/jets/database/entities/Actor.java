@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "actor")
@@ -27,6 +28,9 @@ public class Actor {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actor", fetch = FetchType.LAZY)
+    private List<FilmActor> filmActorList;
 
     public Integer getId() {
         return id;

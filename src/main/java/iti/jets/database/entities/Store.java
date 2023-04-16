@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "store")
@@ -26,6 +27,15 @@ public class Store {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    private List<Staff> staffList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    private List<Inventory> inventoryList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "storeId", fetch = FetchType.LAZY)
+    private List<Customer> customerList;
 
     public Integer getId() {
         return id;

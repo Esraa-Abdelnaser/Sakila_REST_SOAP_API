@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Table(name = "address")
@@ -28,10 +29,6 @@ public class Address {
     @Column(name = "district", nullable = false, length = 20)
     private String district;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "city_id", nullable = false)
-    private City city;
 
     @Size(max = 10)
     @Column(name = "postal_code", length = 10)
@@ -45,6 +42,26 @@ public class Address {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
+
+    @Basic(optional = false)
+    @Lob
+    @Column(name = "location")
+    private byte[] location;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "city_id", nullable = false)
+    private City city;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
+    private List<Staff> staffList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
+    private List<Store> storeList;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "address", fetch = FetchType.LAZY)
+    private List<Customer> customerList;
 
     public Integer getId() {
         return id;
@@ -108,6 +125,13 @@ public class Address {
 
     public void setLastUpdate(Instant lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+    public byte[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(byte[] location) {
+        this.location = location;
     }
 
 /*

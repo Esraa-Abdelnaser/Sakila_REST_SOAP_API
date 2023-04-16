@@ -15,25 +15,25 @@ import java.time.Instant;
  */
 @Data
 public class FilmDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Size(max = 128)
     @NotNull
-    private final String title;
-    private final String description;
-    private final Integer releaseYear;
+    private String title;
+    private String description;
+    private Integer releaseYear;
     @NotNull
-    private final Language language;
-    private final Language originalLanguage;
-    private final Short rentalDuration;
+    private Language language;
+    private Language originalLanguage;
+    private Short rentalDuration;
     @NotNull
-    private final BigDecimal rentalRate;
-    private final Integer length;
+    private BigDecimal rentalRate;
+    private Integer length;
     @NotNull
-    private final BigDecimal replacementCost;
+    private BigDecimal replacementCost;
     @Size(max = 5)
-    private final String rating;
+    private String rating;
     @Size(max = 54)
-    private final String specialFeatures;
+    private String specialFeatures;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

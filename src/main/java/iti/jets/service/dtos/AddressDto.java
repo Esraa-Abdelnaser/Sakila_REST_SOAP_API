@@ -14,22 +14,22 @@ import java.time.Instant;
  */
 @Data
 public class AddressDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Size(max = 50)
     @NotNull
-    private final String address;
+    private String address;
     @Size(max = 50)
-    private final String address2;
+    private String address2;
     @Size(max = 20)
     @NotNull
-    private final String district;
+    private String district;
     @NotNull
-    private final City city;
+    private City city;
     @Size(max = 10)
-    private final String postalCode;
+    private String postalCode;
     @Size(max = 20)
     @NotNull
-    private final String phone;
+    private String phone;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

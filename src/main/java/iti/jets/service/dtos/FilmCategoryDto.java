@@ -13,9 +13,9 @@ import java.time.Instant;
  */
 @Data
 public class FilmCategoryDto implements Serializable {
-    private final FilmCategoryId id;
-    private final FilmDto film;
-    private final CategoryDto category;
+    private FilmCategoryId id;
+    private FilmDto film;
+    private CategoryDto category;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

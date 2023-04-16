@@ -27,21 +27,27 @@ public class GenericRepo<K, E> implements Repo<K, E> {
 
     @Override
     public void insert(E entity) {
-        entityManager.getTransaction().begin();
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         entityManager.persist(entity);
         entityManager.getTransaction().commit();
     }
 
     @Override
     public void update(E entity) {
-        entityManager.getTransaction().begin();
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         entityManager.merge(entity);
         entityManager.getTransaction().commit();
     }
 
     @Override
     public void delete(E entity) {
-        entityManager.getTransaction().begin();
+        if(!entityManager.getTransaction().isActive()){
+            entityManager.getTransaction().begin();
+        }
         entityManager.remove(entity);
         entityManager.getTransaction().commit();
     }

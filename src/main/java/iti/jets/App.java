@@ -44,6 +44,7 @@ public class App {
         actor.setLastName("naser");
         actor.setLastUpdate(Instant.parse("2017-02-03T10:37:30.00Z"));
         actorRepoImpl.insert(actor);
+        System.out.println(Instant.parse("2017-02-03T10:37:30.00Z"));
         List<Actor> listOfActors = actorRepoImpl.getAll();
         List<ActorDto> listOfActorsDto = new ActorServicesImpl().getAll();
         for (ActorDto actor1 : listOfActorsDto) {

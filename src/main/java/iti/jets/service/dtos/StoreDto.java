@@ -12,11 +12,11 @@ import java.time.Instant;
  */
 @Data
 public class StoreDto implements Serializable {
-    private final Short id;
+    private Short id;
     @NotNull
-    private final StaffDto managerStaff;
+    private StaffDto managerStaff;
     @NotNull
-    private final AddressDto address;
+    private AddressDto address;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

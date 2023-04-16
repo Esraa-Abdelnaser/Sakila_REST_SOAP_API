@@ -13,11 +13,11 @@ import java.time.Instant;
  */
 @Data
 public class InventoryDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @NotNull
-    private final FilmDto film;
+    private FilmDto film;
     @NotNull
-    private final Store store;
+    private Store store;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

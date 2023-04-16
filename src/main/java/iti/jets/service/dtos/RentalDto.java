@@ -13,16 +13,16 @@ import java.time.Instant;
  */
 @Data
 public class RentalDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @NotNull
-    private final Instant rentalDate;
+    private Instant rentalDate;
     @NotNull
-    private final InventoryDto inventory;
+    private InventoryDto inventory;
     @NotNull
-    private final CustomerDto customer;
-    private final Instant returnDate;
+    private CustomerDto customer;
+    private Instant returnDate;
     @NotNull
-    private final Staff staff;
+    private Staff staff;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

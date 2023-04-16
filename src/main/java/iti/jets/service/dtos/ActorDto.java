@@ -13,13 +13,13 @@ import java.time.Instant;
  */
 @Data
 public class ActorDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Size(max = 45)
     @NotNull
-    private final String firstName;
+    private String firstName;
     @Size(max = 45)
     @NotNull
-    private final String lastName;
+    private String lastName;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

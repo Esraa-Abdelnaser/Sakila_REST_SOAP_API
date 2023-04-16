@@ -14,12 +14,12 @@ import java.time.Instant;
  */
 @Data
 public class CityDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Size(max = 50)
     @NotNull
-    private final String city;
+    private String city;
     @NotNull
-    private final Country country;
+    private Country country;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

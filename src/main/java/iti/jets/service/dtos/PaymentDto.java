@@ -13,15 +13,15 @@ import java.time.Instant;
  */
 @Data
 public class PaymentDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @NotNull
-    private final CustomerDto customer;
+    private CustomerDto customer;
     @NotNull
-    private final StaffDto staff;
-    private final RentalDto rental;
+    private StaffDto staff;
+    private RentalDto rental;
     @NotNull
-    private final BigDecimal amount;
+    private BigDecimal amount;
     @NotNull
-    private final Instant paymentDate;
-    private final Instant lastUpdate;
+    private Instant paymentDate;
+    private Instant lastUpdate;
 }

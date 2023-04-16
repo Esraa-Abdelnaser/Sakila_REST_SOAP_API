@@ -15,6 +15,6 @@ public class FilmTextDto implements Serializable {
     private final Short id;
     @Size(max = 255)
     @NotNull
-    private final String title;
-    private final String description;
+    private String title;
+    private String description;
 }

@@ -13,10 +13,10 @@ import java.time.Instant;
  */
 @Data
 public class CountryDto implements Serializable {
-    private final Integer id;
+    private Integer id;
     @Size(max = 50)
     @NotNull
-    private final String country;
+    private String country;
     @NotNull
-    private final Instant lastUpdate;
+    private Instant lastUpdate;
 }

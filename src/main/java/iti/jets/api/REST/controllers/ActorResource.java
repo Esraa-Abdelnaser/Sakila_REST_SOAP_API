@@ -13,12 +13,12 @@ import java.util.Optional;
 
 @Path("/actor")
 public class ActorResource {
-    private ActorServicesImpl ActorServices = new ActorServicesImpl();
+    private ActorServicesImpl actorServices = new ActorServicesImpl();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
-        List<ActorDto> listOfActorDto = ActorServices.getAll();
+        List<ActorDto> listOfActorDto = actorServices.getAll();
         return Response.ok(listOfActorDto).build();
     }
 
@@ -26,7 +26,7 @@ public class ActorResource {
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getById(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
-        Optional<ActorDto> optionalActor = Optional.ofNullable(ActorServices.getById(id));
+        Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
 
         if (optionalActor.isPresent()) {
             ActorDto actorDto = optionalActor.get();
@@ -41,7 +41,7 @@ public class ActorResource {
     public Response insert(ActorDto actorDto, @Context UriInfo uriInfo) {
 
         try {
-            ActorServices.insert(actorDto);
+            actorServices.insert(actorDto);
             return Response.ok("success").build();
         } catch (Exception e) {
             return Response.ok(e.getMessage()).build();
@@ -51,14 +51,14 @@ public class ActorResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     public Response update(ActorDto actorDto, @Context UriInfo uriInfo) {
-        Optional<ActorDto> optionalActor = Optional.ofNullable(ActorServices.getById(actorDto.getId()));
+        Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(actorDto.getId()));
 
         if (optionalActor.isPresent()) {
             ActorDto existingActor = optionalActor.get();
             existingActor.setFirstName(actorDto.getFirstName());
             existingActor.setLastName(actorDto.getLastName());
             existingActor.setLastUpdate(actorDto.getLastUpdate());
-            ActorServices.update(existingActor);
+            actorServices.update(existingActor);
             return Response.ok(existingActor).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,10 +68,10 @@ public class ActorResource {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
-        Optional<ActorDto> optionalActor = Optional.ofNullable(ActorServices.getById(id));
+        Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
         if (optionalActor.isPresent()) {
-            ActorDto actorDto = ActorServices.getById(id);
-            ActorServices.delete(actorDto);
+            ActorDto actorDto = actorServices.getById(id);
+            actorServices.delete(actorDto);
         }
         return Response.noContent().build();
     }

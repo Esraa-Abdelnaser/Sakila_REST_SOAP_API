@@ -8,7 +8,7 @@ import jakarta.validation.constraints.Size;
 public class FilmText {
     @Id
     @Column(name = "film_id", nullable = false)
-    private Short id;
+    private Integer id;
 
     @Size(max = 255)
     @NotNull
@@ -19,11 +19,11 @@ public class FilmText {
     @Column(name = "description")
     private String description;
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

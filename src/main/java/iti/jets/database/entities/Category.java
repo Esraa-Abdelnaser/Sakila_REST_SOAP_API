@@ -14,7 +14,7 @@ import java.time.Instant;
 public class Category {
     @Id
     @Column(name = "category_id", columnDefinition = "TINYINT UNSIGNED not null")
-    private Short id;
+    private Integer id;
 
     @Size(max = 25)
     @NotNull
@@ -25,11 +25,11 @@ public class Category {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

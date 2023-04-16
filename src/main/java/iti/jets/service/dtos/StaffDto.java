@@ -14,7 +14,7 @@ import java.time.Instant;
  */
 @Data
 public class StaffDto implements Serializable {
-    private Short id;
+    private Integer id;
     @Size(max = 45)
     @NotNull
     private String firstName;

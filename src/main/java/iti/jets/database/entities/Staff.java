@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 public class Staff {
     @Id
     @Column(name = "staff_id", columnDefinition = "TINYINT UNSIGNED not null")
-    private Short id;
+    private Integer id;
 
     @Size(max = 45)
     @NotNull
@@ -56,11 +56,11 @@ public class Staff {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

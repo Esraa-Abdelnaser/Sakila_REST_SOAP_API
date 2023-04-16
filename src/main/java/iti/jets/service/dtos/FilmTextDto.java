@@ -12,7 +12,7 @@ import java.io.Serializable;
  */
 @Data
 public class FilmTextDto implements Serializable {
-    private final Short id;
+    private final Integer id;
     @Size(max = 255)
     @NotNull
     private String title;

@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 public class Store {
     @Id
     @Column(name = "store_id", columnDefinition = "TINYINT UNSIGNED not null")
-    private Short id;
+    private Integer id;
 
     @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
@@ -26,11 +26,11 @@ public class Store {
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
 
-    public Short getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Short id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

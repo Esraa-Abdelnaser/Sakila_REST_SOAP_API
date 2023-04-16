@@ -12,7 +12,7 @@ import java.time.Instant;
  */
 @Data
 public class StoreDto implements Serializable {
-    private Short id;
+    private Integer id;
     @NotNull
     private StaffDto managerStaff;
     @NotNull

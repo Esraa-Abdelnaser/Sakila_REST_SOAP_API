@@ -13,7 +13,7 @@ import java.time.Instant;
  */
 @Data
 public class LanguageDto implements Serializable {
-    private Short id;
+    private Integer id;
     @Size(max = 20)
     @NotNull
     private String name;

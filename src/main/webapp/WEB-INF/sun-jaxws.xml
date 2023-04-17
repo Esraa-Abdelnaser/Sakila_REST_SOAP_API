@@ -1,0 +1,72 @@
+<endpoints xmlns="http://java.sun.com/xml/ns/jax-ws/ri/runtime" version="2.0">
+
+    <endpoint
+            name="actorService"
+            implementation="iti.jets.api.SOAP.controllers.ActorSoapService"
+            url-pattern="/ws/actorService"/>
+
+    <endpoint
+            name="addressService"
+            implementation="iti.jets.api.SOAP.controllers.AddressSoapService"
+            url-pattern="/ws/addressService"/>
+
+    <endpoint
+            name="categoryService"
+            implementation="iti.jets.api.SOAP.controllers.CategorySoapService"
+            url-pattern="/ws/categoryService"/>
+
+    <endpoint
+            name="cityService"
+            implementation="iti.jets.api.SOAP.controllers.CitySoapService"
+            url-pattern="/ws/cityService"/>
+    <endpoint
+            name="countryService"
+            implementation="iti.jets.api.SOAP.controllers.CountrySoapService"
+            url-pattern="/ws/countryService"/>
+
+    <endpoint
+            name="customerService"
+            implementation="iti.jets.api.SOAP.controllers.CustomerSoapService"
+            url-pattern="/ws/customerService"/>
+
+    <endpoint
+            name="filmService"
+            implementation="iti.jets.api.SOAP.controllers.FilmSoapService"
+            url-pattern="/ws/filmService"/>
+
+    <endpoint
+            name="filmTextService"
+            implementation="iti.jets.api.SOAP.controllers.FilmTextSoapService"
+            url-pattern="/ws/filmTextService"/>
+
+    <endpoint
+            name="inventoryService"
+            implementation="iti.jets.api.SOAP.controllers.InventorySoapService"
+            url-pattern="/ws/inventoryService"/>
+
+    <endpoint
+            name="languageService"
+            implementation="iti.jets.api.SOAP.controllers.LanguageSoapService"
+            url-pattern="/ws/languageService"/>
+
+    <endpoint
+            name="paymentService"
+            implementation="iti.jets.api.SOAP.controllers.PaymentSoapService"
+            url-pattern="/ws/paymentService"/>
+
+    <endpoint
+            name="rentalService"
+            implementation="iti.jets.api.SOAP.controllers.RentalSoapService"
+            url-pattern="/ws/rentalService"/>
+
+    <endpoint
+            name="staffService"
+            implementation="iti.jets.api.SOAP.controllers.StaffSoapService"
+            url-pattern="/ws/staffService"/>
+
+    <endpoint
+            name="storeService"
+            implementation="iti.jets.api.SOAP.controllers.StoreSoapService"
+            url-pattern="/ws/storeService"/>
+
+</endpoints>

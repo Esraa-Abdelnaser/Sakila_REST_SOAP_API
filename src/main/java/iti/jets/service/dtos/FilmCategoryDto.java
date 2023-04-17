@@ -18,8 +18,8 @@ import java.time.Instant;
 @NoArgsConstructor
 public class FilmCategoryDto implements Serializable {
     private FilmCategoryId id;
-    private FilmDto film;
-    private CategoryDto category;
+//    private FilmDto film;
+//    private CategoryDto category;
     @NotNull
     private Instant lastUpdate;
 }

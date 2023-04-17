@@ -20,8 +20,8 @@ import java.util.List;
 public class CustomerDto implements Serializable {
 
     private Integer id;
-    @NotNull
-    private StoreDto store;
+//    @NotNull
+//    private StoreDto store;
     @Size(max = 45)
     @NotNull
     private String firstName;
@@ -30,8 +30,14 @@ public class CustomerDto implements Serializable {
     private String lastName;
     @Size(max = 50)
     private String email;
-    @NotNull
-    private AddressDto address;
+//    @NotNull
+//    private AddressDto address;
+////    @NotNull
+////    private StoreDto store;
+////    @NotNull
+////    private AddressDto address;
+////    private List<RentalDto> rentalList;
+////    private List<PaymentDto> paymentList;
     @NotNull
     private Boolean active = false;
     @NotNull

@@ -25,9 +25,19 @@ public class CityDto implements Serializable {
     @NotNull
     private String city;
     @NotNull
-    private CountryDto country;
-    @NotNull
+//    private CountryDto country;
+//    @NotNull
     private Instant lastUpdate;
     private List<AddressDto> addressList;
+
+//    private Integer id;
+//    @Size(max = 50)
+//    @NotNull
+//    private String city;
+//    @NotNull
+//    private Integer countryId;
+//    @NotNull
+//    private Instant lastUpdate;
+////    private List<AddressDto> addressList;
 
 }

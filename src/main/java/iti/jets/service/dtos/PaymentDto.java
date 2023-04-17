@@ -18,12 +18,12 @@ import java.time.Instant;
 @NoArgsConstructor
 public class PaymentDto implements Serializable {
     private Integer id;
-    @NotNull
-    private CustomerDto customer;
-    @NotNull
-    private StaffDto staff;
-    private RentalDto rental;
-    @NotNull
+//    @NotNull
+//    private CustomerDto customer;
+//    @NotNull
+//    private StaffDto staff;
+//    private RentalDto rental;
+//    @NotNull
     private BigDecimal amount;
     @NotNull
     private Instant paymentDate;

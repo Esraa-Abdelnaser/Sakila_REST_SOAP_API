@@ -26,8 +26,8 @@ public class FilmDto implements Serializable {
     private String title;
     private String description;
     private Integer releaseYear;
-    @NotNull
-    private LanguageDto language;
+//    @NotNull
+//    private LanguageDto language;
     private LanguageDto originalLanguage;
     @NotNull
     private Short rentalDuration;

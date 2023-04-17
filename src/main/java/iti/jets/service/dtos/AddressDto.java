@@ -21,36 +21,24 @@ import java.util.List;
 public class AddressDto implements Serializable {
 
     private Integer id;
-
     @Size(max = 50)
     @NotNull
     private String address;
-
     @Size(max = 50)
     private String address2;
-
     @Size(max = 20)
     @NotNull
     private String district;
-
     @Size(max = 10)
     private String postalCode;
-
     @Size(max = 20)
     @NotNull
     private String phone;
-
     @NotNull
     private Instant lastUpdate;
-
     private byte[] location;
-
-    @NotNull
-    private CityDto city;
-
-    private List<StaffDto> staffList;
-
+//    @NotNull
+//    private CityDto city;
     private List<StoreDto> storeList;
-
     private List<CustomerDto> customerList;
 }

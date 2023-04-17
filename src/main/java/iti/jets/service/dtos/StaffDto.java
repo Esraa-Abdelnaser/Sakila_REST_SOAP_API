@@ -18,6 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StaffDto implements Serializable {
+
     private Integer id;
     @Size(max = 45)
     @NotNull
@@ -25,8 +26,8 @@ public class StaffDto implements Serializable {
     @Size(max = 45)
     @NotNull
     private String lastName;
-    @NotNull
-    private AddressDto address;
+//    @NotNull
+//    private AddressDto address;
     private byte[] picture;
     @Size(max = 50)
     private String email;
@@ -43,4 +44,5 @@ public class StaffDto implements Serializable {
     private Instant lastUpdate;
     private List<RentalDto> rentalList;
     private List<PaymentDto> paymentList;
+
 }

@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.UriInfo;
 import java.util.List;
 import java.util.Optional;
 
+@Path("/category")
 public class CategoryResource {
 
     private CategoryServicesImpl categoryServices = new CategoryServicesImpl();

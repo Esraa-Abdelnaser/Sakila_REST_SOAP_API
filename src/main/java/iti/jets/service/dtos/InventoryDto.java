@@ -19,11 +19,14 @@ import java.util.List;
 @NoArgsConstructor
 public class InventoryDto implements Serializable {
     private Integer id;
-    @NotNull
-    private FilmDto film;
-    @NotNull
-    private StoreDto store;
+//    @NotNull
+//    private FilmDto film;
+//    @NotNull
+//    private StoreDto store;
+//    @NotNull
+//    private StoreDto store;
     @NotNull
     private Instant lastUpdate;
     private List<RentalDto> rentalList;
+
 }

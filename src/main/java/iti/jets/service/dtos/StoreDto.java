@@ -17,14 +17,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StoreDto implements Serializable {
+
     private Integer id;
-    @NotNull
-    private StaffDto managerStaff;
-    @NotNull
-    private AddressDto address;
+
     @NotNull
     private Instant lastUpdate;
-    private List<StaffDto> staffList;
+//    @NotNull
+//    private StaffDto managerStaff;
+//    @NotNull
+//    private AddressDto address;
+//    private List<StaffDto> staffList;
+
     private List<InventoryDto> inventoryList;
+
     private List<CustomerDto> customerList;
+
 }

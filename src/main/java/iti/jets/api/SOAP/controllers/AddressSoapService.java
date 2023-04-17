@@ -4,8 +4,6 @@ import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.impls.AddressServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +12,7 @@ import java.util.Optional;
 public class AddressSoapService {
     private AddressServicesImpl addressServices = new AddressServicesImpl();
 
-    public List<AddressDto> getAll(@Context UriInfo uriInfo) {
+    public List<AddressDto> getAll() {
         List<AddressDto> listOfAddressDto = addressServices.getAll();
         return listOfAddressDto;
     }

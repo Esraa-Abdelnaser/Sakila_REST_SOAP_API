@@ -4,7 +4,6 @@ import iti.jets.service.dtos.InventoryDto;
 import iti.jets.service.impls.InventoryServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,55 @@ import java.util.Optional;
 @WebService
 public class InventorySoapService {
     private InventoryServicesImpl inventoryServices = new InventoryServicesImpl();
-    
-    public Response getAll() {
+
+    public List<InventoryDto> getAll() {
         List<InventoryDto> listOfInventoryDto = inventoryServices.getAll();
-        return Response.ok(listOfInventoryDto).build();
+        return listOfInventoryDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public InventoryDto getById(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
 
         if (optionalInventory.isPresent()) {
             InventoryDto inventoryDto = optionalInventory.get();
-            return Response.ok(inventoryDto).build();
+            return inventoryDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(InventoryDto inventoryDto) {
+
+    public String insert(InventoryDto inventoryDto) {
 
         try {
             inventoryServices.insert(inventoryDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(InventoryDto inventoryDto) {
+
+    public InventoryDto update(InventoryDto inventoryDto) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(inventoryDto.getId()));
 
         if (optionalInventory.isPresent()) {
             inventoryServices.update(inventoryDto);
-            return Response.ok(inventoryDto).build();
+            return inventoryDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
-        if (optionalInventory.isPresent()) {
-            InventoryDto inventoryDto = inventoryServices.getById(id);
-            inventoryServices.delete(inventoryDto);
+        try {
+            if (optionalInventory.isPresent()) {
+                InventoryDto inventoryDto = inventoryServices.getById(id);
+                inventoryServices.delete(inventoryDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

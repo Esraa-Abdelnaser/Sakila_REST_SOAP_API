@@ -4,7 +4,6 @@ import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.impls.ActorServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,47 +12,52 @@ import java.util.Optional;
 public class ActorSoapService {
     private ActorServicesImpl actorServices = new ActorServicesImpl();
 
-    public Response getAll() {
+    public List<ActorDto> getAll() {
         List<ActorDto> listOfActorDto = actorServices.getAll();
-        return Response.ok(listOfActorDto).build();
+        return listOfActorDto;
     }
 
-    public Response getById(@WebParam(name="id") Integer id) {
+    public ActorDto getById(@WebParam(name = "id") Integer id) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
         if (optionalActor.isPresent()) {
             ActorDto actorDto = optionalActor.get();
-            return Response.ok(actorDto).build();
+            return actorDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
 
-    public Response insert(ActorDto actorDto) {
+    public String insert(ActorDto actorDto) {
 
         try {
             actorServices.insert(actorDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
 
-    public Response update(ActorDto actorDto) {
+    public ActorDto update(ActorDto actorDto) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(actorDto.getId()));
         if (optionalActor.isPresent()) {
             actorServices.update(actorDto);
-            return Response.ok(actorDto).build();
+            return actorDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
 
-    public Response delete(@WebParam(name="id") Integer id) {
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
-        if (optionalActor.isPresent()) {
-            ActorDto actorDto = actorServices.getById(id);
-            actorServices.delete(actorDto);
+        try {
+            if (optionalActor.isPresent()) {
+                ActorDto actorDto = actorServices.getById(id);
+                actorServices.delete(actorDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

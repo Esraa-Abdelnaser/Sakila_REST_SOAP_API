@@ -4,7 +4,6 @@ import iti.jets.service.dtos.RentalDto;
 import iti.jets.service.impls.RentalServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,55 @@ import java.util.Optional;
 @WebService
 public class RentalSoapService {
     private RentalServicesImpl rentalServices = new RentalServicesImpl();
-    
-    public Response getAll() {
+
+    public List<RentalDto> getAll() {
         List<RentalDto> listOfRentalDto = rentalServices.getAll();
-        return Response.ok(listOfRentalDto).build();
+        return listOfRentalDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public RentalDto getById(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
 
         if (optionalRental.isPresent()) {
             RentalDto rentalDto = optionalRental.get();
-            return Response.ok(rentalDto).build();
+            return rentalDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(RentalDto rentalDto) {
+
+    public String insert(RentalDto rentalDto) {
 
         try {
             rentalServices.insert(rentalDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(RentalDto rentalDto) {
+
+    public RentalDto update(RentalDto rentalDto) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(rentalDto.getId()));
 
         if (optionalRental.isPresent()) {
             rentalServices.update(rentalDto);
-            return Response.ok(rentalDto).build();
+            return rentalDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
-        if (optionalRental.isPresent()) {
-            RentalDto rentalDto = rentalServices.getById(id);
-            rentalServices.delete(rentalDto);
+        try {
+            if (optionalRental.isPresent()) {
+                RentalDto rentalDto = rentalServices.getById(id);
+                rentalServices.delete(rentalDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

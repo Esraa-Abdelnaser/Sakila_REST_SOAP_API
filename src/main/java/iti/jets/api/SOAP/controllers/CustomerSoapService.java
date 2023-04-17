@@ -4,7 +4,6 @@ import iti.jets.service.dtos.CustomerDto;
 import iti.jets.service.impls.CustomerServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,50 +12,55 @@ import java.util.Optional;
 public class CustomerSoapService {
 
     private CustomerServicesImpl customerServices = new CustomerServicesImpl();
-    
-    public Response getAll() {
+
+    public List<CustomerDto> getAll() {
         List<CustomerDto> listOfCustomerDto = customerServices.getAll();
-        return Response.ok(listOfCustomerDto).build();
+        return listOfCustomerDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public CustomerDto getById(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
 
         if (optionalCustomer.isPresent()) {
             CustomerDto customerDto = optionalCustomer.get();
-            return Response.ok(customerDto).build();
+            return customerDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(CustomerDto customerDto) {
+
+    public String insert(CustomerDto customerDto) {
 
         try {
             customerServices.insert(customerDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(CustomerDto customerDto) {
+
+    public CustomerDto update(CustomerDto customerDto) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(customerDto.getId()));
 
         if (optionalCustomer.isPresent()) {
             customerServices.update(customerDto);
-            return Response.ok(customerDto).build();
+            return customerDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
-        if (optionalCustomer.isPresent()) {
-            CustomerDto customerDto = customerServices.getById(id);
-            customerServices.delete(customerDto);
+        try {
+            if (optionalCustomer.isPresent()) {
+                CustomerDto customerDto = customerServices.getById(id);
+                customerServices.delete(customerDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

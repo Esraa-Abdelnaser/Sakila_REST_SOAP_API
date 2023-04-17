@@ -4,7 +4,6 @@ import iti.jets.service.dtos.CountryDto;
 import iti.jets.service.impls.CountryServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,56 @@ import java.util.Optional;
 @WebService
 public class CountrySoapService {
     private CountryServicesImpl countryServices = new CountryServicesImpl();
-    
-    public Response getAll() {
+
+    public List<CountryDto> getAll() {
         List<CountryDto> listOfCountryDto = countryServices.getAll();
-        return Response.ok(listOfCountryDto).build();
+        return listOfCountryDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public CountryDto getById(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
 
         if (optionalCountry.isPresent()) {
             CountryDto countryDto = optionalCountry.get();
-            return Response.ok(countryDto).build();
+            return countryDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(CountryDto countryDto) {
+
+    public String insert(CountryDto countryDto) {
 
         try {
             countryServices.insert(countryDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(CountryDto countryDto) {
+
+    public CountryDto update(CountryDto countryDto) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(countryDto.getId()));
 
         if (optionalCountry.isPresent()) {
             countryServices.update(countryDto);
-            return Response.ok(countryDto).build();
+            return countryDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
-        if (optionalCountry.isPresent()) {
-            CountryDto countryDto = countryServices.getById(id);
-            countryServices.delete(countryDto);
+        try {
+            if (optionalCountry.isPresent()) {
+                CountryDto countryDto = countryServices.getById(id);
+                countryServices.delete(countryDto);
+                return "success";
+            }
+            return "failed";
+
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

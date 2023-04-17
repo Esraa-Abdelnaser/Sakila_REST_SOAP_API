@@ -4,7 +4,6 @@ import iti.jets.service.dtos.CityDto;
 import iti.jets.service.impls.CityServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,55 @@ import java.util.Optional;
 @WebService
 public class CitySoapService {
     private CityServicesImpl cityServices = new CityServicesImpl();
-    
-    public Response getAll() {
+
+    public List<CityDto> getAll() {
         List<CityDto> listOfCityDto = cityServices.getAll();
-        return Response.ok(listOfCityDto).build();
+        return listOfCityDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public CityDto getById(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
 
         if (optionalCity.isPresent()) {
             CityDto cityDto = optionalCity.get();
-            return Response.ok(cityDto).build();
+            return cityDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(CityDto cityDto) {
+
+    public String insert(CityDto cityDto) {
 
         try {
             cityServices.insert(cityDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(CityDto cityDto) {
+
+    public CityDto update(CityDto cityDto) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(cityDto.getId()));
 
         if (optionalCity.isPresent()) {
             cityServices.update(cityDto);
-            return Response.ok(cityDto).build();
+            return cityDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
-        if (optionalCity.isPresent()) {
-            CityDto cityDto = cityServices.getById(id);
-            cityServices.delete(cityDto);
+        try {
+            if (optionalCity.isPresent()) {
+                CityDto cityDto = cityServices.getById(id);
+                cityServices.delete(cityDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

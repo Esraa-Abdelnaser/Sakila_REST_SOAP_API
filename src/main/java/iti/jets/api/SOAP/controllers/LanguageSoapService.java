@@ -4,7 +4,6 @@ import iti.jets.service.dtos.LanguageDto;
 import iti.jets.service.impls.LanguageServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,56 @@ import java.util.Optional;
 @WebService
 public class LanguageSoapService {
     private LanguageServicesImpl languageServices = new LanguageServicesImpl();
-    
-    public Response getAll() {
+
+    public List<LanguageDto> getAll() {
         List<LanguageDto> listOfLanguageDto = languageServices.getAll();
-        return Response.ok(listOfLanguageDto).build();
+        return listOfLanguageDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public LanguageDto getById(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
 
         if (optionalLanguage.isPresent()) {
             LanguageDto languageDto = optionalLanguage.get();
-            return Response.ok(languageDto).build();
+            return languageDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(LanguageDto languageDto) {
+
+    public String insert(LanguageDto languageDto) {
 
         try {
             languageServices.insert(languageDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(LanguageDto languageDto) {
+
+    public LanguageDto update(LanguageDto languageDto) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(languageDto.getId()));
 
         if (optionalLanguage.isPresent()) {
             languageServices.update(languageDto);
-            return Response.ok(languageDto).build();
+            return languageDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
-        if (optionalLanguage.isPresent()) {
-            LanguageDto languageDto = languageServices.getById(id);
-            languageServices.delete(languageDto);
+        try {
+            if (optionalLanguage.isPresent()) {
+                LanguageDto languageDto = languageServices.getById(id);
+                languageServices.delete(languageDto);
+
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

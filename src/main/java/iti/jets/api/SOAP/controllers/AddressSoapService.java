@@ -5,7 +5,6 @@ import iti.jets.service.impls.AddressServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriInfo;
 
 import java.util.List;
@@ -15,50 +14,55 @@ import java.util.Optional;
 public class AddressSoapService {
     private AddressServicesImpl addressServices = new AddressServicesImpl();
 
-    public Response getAll(@Context UriInfo uriInfo) {
+    public List<AddressDto> getAll(@Context UriInfo uriInfo) {
         List<AddressDto> listOfAddressDto = addressServices.getAll();
-        return Response.ok(listOfAddressDto).build();
+        return listOfAddressDto;
     }
 
-    public Response getById(@WebParam(name="id") Integer id) {
+    public AddressDto getById(@WebParam(name = "id") Integer id) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(id));
 
         if (optionalAddress.isPresent()) {
             AddressDto addressDto = optionalAddress.get();
-            return Response.ok(addressDto).build();
+            return addressDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
 
-    public Response insert(AddressDto addressDto) {
+    public String insert(AddressDto addressDto) {
 
         try {
             addressServices.insert(addressDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
 
-    public Response update(AddressDto addressDto) {
+    public AddressDto update(AddressDto addressDto) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(addressDto.getId()));
 
         if (optionalAddress.isPresent()) {
             addressServices.update(addressDto);
-            return Response.ok(addressDto).build();
+            return addressDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
 
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(id));
-        if (optionalAddress.isPresent()) {
-            AddressDto addressDto = addressServices.getById(id);
-            addressServices.delete(addressDto);
+        try {
+            if (optionalAddress.isPresent()) {
+                AddressDto addressDto = addressServices.getById(id);
+                addressServices.delete(addressDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

@@ -4,7 +4,6 @@ import iti.jets.service.dtos.StaffDto;
 import iti.jets.service.impls.StaffServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,50 +11,55 @@ import java.util.Optional;
 @WebService
 public class StaffSoapService {
     private StaffServicesImpl staffServices = new StaffServicesImpl();
-    
-    public Response getAll() {
+
+    public List<StaffDto> getAll() {
         List<StaffDto> listOfStaffDto = staffServices.getAll();
-        return Response.ok(listOfStaffDto).build();
+        return listOfStaffDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public StaffDto getById(@WebParam(name = "id") Integer id) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(id));
 
         if (optionalStaff.isPresent()) {
             StaffDto staffDto = optionalStaff.get();
-            return Response.ok(staffDto).build();
+            return staffDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(StaffDto staffDto) {
+
+    public String insert(StaffDto staffDto) {
 
         try {
             staffServices.insert(staffDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(StaffDto staffDto) {
+
+    public StaffDto update(StaffDto staffDto) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(staffDto.getId()));
 
         if (optionalStaff.isPresent()) {
             staffServices.update(staffDto);
-            return Response.ok(staffDto).build();
+            return staffDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(id));
-        if (optionalStaff.isPresent()) {
-            StaffDto staffDto = staffServices.getById(id);
-            staffServices.delete(staffDto);
+        try {
+            if (optionalStaff.isPresent()) {
+                StaffDto staffDto = staffServices.getById(id);
+                staffServices.delete(staffDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

@@ -4,7 +4,6 @@ import iti.jets.service.dtos.FilmTextDto;
 import iti.jets.service.impls.FilmTextServicesImpl;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
-import jakarta.ws.rs.core.Response;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,49 +12,54 @@ import java.util.Optional;
 public class FilmTextSoapService {
     private FilmTextServicesImpl filmTextServices = new FilmTextServicesImpl();
 
-    public Response getAll() {
+    public List<FilmTextDto> getAll() {
         List<FilmTextDto> listOfFilmTextDto = filmTextServices.getAll();
-        return Response.ok(listOfFilmTextDto).build();
+        return listOfFilmTextDto;
     }
-    
-    public Response getById(@WebParam(name="id") Integer id) {
+
+    public FilmTextDto getById(@WebParam(name = "id") Integer id) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(id));
 
         if (optionalFilmText.isPresent()) {
             FilmTextDto filmTextDto = optionalFilmText.get();
-            return Response.ok(filmTextDto).build();
+            return filmTextDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response insert(FilmTextDto filmTextDto) {
+
+    public String insert(FilmTextDto filmTextDto) {
 
         try {
             filmTextServices.insert(filmTextDto);
-            return Response.ok("success").build();
+            return "success";
         } catch (Exception e) {
-            return Response.ok(e.getMessage()).build();
+            return e.getMessage();
         }
     }
-    
-    public Response update(FilmTextDto filmTextDto) {
+
+    public FilmTextDto update(FilmTextDto filmTextDto) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(filmTextDto.getId()));
 
         if (optionalFilmText.isPresent()) {
             filmTextServices.update(filmTextDto);
-            return Response.ok(filmTextDto).build();
+            return filmTextDto;
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return null;
         }
     }
-    
-    public Response delete(@WebParam(name="id") Integer id) {
+
+    public String delete(@WebParam(name = "id") Integer id) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(id));
-        if (optionalFilmText.isPresent()) {
-            FilmTextDto filmTextDto = filmTextServices.getById(id);
-            filmTextServices.delete(filmTextDto);
+        try {
+            if (optionalFilmText.isPresent()) {
+                FilmTextDto filmTextDto = filmTextServices.getById(id);
+                filmTextServices.delete(filmTextDto);
+                return "success";
+            }
+            return "failed";
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return Response.noContent().build();
     }
 }

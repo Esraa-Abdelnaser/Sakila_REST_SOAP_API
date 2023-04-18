@@ -68,6 +68,7 @@ public class Film {
     @NotNull
     @Column(name = "last_update", nullable = false)
     private Instant lastUpdate;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "film", fetch = FetchType.LAZY)
     private List<FilmCategory> filmCategoryList;
 

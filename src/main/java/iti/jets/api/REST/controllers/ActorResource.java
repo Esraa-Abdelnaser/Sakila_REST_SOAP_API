@@ -36,6 +36,20 @@ public class ActorResource {
         }
     }
 
+    @GET
+    @Path("filmsOfActor/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getfilmsForActor(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+        Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
+
+        if (optionalActor.isPresent()) {
+            ActorDto actorDto = optionalActor.get();
+            return Response.ok(actorServices.getfilmsForActor(actorDto)).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response insert(ActorDto actorDto, @Context UriInfo uriInfo) {

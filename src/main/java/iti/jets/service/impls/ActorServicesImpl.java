@@ -11,6 +11,7 @@ import iti.jets.utils.mappers.ActorMapper;
 import iti.jets.utils.mappers.FilmMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,6 +49,7 @@ public class ActorServicesImpl implements ActorServices {
 
     @Override
     public void insert(ActorDto actorDto) {
+        actorDto.setLastUpdate(Instant.now());
         actorRepoImpl.insert(mapper.toEntity(actorDto));
 
     }
@@ -59,6 +61,6 @@ public class ActorServicesImpl implements ActorServices {
 
     @Override
     public void delete(ActorDto actorDto) {
-        actorRepoImpl.delete(mapper.toEntity(actorDto));
+        actorRepoImpl.delete(actorRepoImpl.getById(actorDto.getId()));
     }
 }

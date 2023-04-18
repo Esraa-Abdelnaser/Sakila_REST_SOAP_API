@@ -31,6 +31,5 @@ public class StoreDto implements Serializable {
     @NotNull
     private AddressDto address;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

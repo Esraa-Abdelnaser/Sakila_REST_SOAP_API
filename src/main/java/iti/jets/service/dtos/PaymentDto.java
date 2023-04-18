@@ -38,6 +38,5 @@ public class PaymentDto implements Serializable {
 
     private Instant lastUpdate;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

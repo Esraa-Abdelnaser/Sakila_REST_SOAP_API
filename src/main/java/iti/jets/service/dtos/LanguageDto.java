@@ -30,7 +30,6 @@ public class LanguageDto implements Serializable {
     @NotNull
     private Instant lastUpdate;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 
 }

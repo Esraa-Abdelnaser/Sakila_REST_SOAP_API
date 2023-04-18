@@ -28,6 +28,5 @@ public class FilmTextDto implements Serializable {
 
     private String description;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

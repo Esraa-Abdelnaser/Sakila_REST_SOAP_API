@@ -63,6 +63,5 @@ public class FilmDto implements Serializable {
 
     private List<InventoryDto> inventoryList;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

@@ -48,6 +48,5 @@ public class AddressDto implements Serializable {
     @NotNull
     private CityDto city;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

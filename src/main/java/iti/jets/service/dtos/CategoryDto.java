@@ -31,6 +31,5 @@ public class CategoryDto implements Serializable {
 
     private List<FilmCategoryDto> filmCategoryList;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 }

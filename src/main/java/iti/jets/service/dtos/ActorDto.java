@@ -35,7 +35,6 @@ public class ActorDto implements Serializable {
 
     private List<FilmActorDto> filmActorList;
 
-    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
     private List<Link> links;
 
 }

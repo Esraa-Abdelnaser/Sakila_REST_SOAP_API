@@ -2,6 +2,8 @@ package iti.jets.service.dtos;
 
 import iti.jets.database.entities.Store;
 import jakarta.validation.constraints.NotNull;
+import jakarta.ws.rs.core.Link;
+import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -22,14 +24,13 @@ public class StoreDto implements Serializable {
 
     @NotNull
     private Instant lastUpdate;
+
 //    @NotNull
 //    private StaffDto managerStaff;
-//    @NotNull
-//    private AddressDto address;
-//    private List<StaffDto> staffList;
 
-    private List<InventoryDto> inventoryList;
+    @NotNull
+    private AddressDto address;
 
-    private List<CustomerDto> customerList;
-
+    @XmlJavaTypeAdapter(Link.JaxbAdapter.class)
+    private List<Link> links;
 }

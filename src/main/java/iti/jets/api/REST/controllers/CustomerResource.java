@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.CustomerDto;
 import iti.jets.service.impls.CustomerServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 @Path("/customer")
@@ -19,6 +18,10 @@ public class CustomerResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<CustomerDto> listOfCustomerDto = customerServices.getAll();
+        for (CustomerDto customerDto : listOfCustomerDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            customerDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfCustomerDto).build();
     }
 
@@ -30,6 +33,8 @@ public class CustomerResource {
 
         if (optionalCustomer.isPresent()) {
             CustomerDto customerDto = optionalCustomer.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            customerDto.setLinks(Arrays.asList(self));
             return Response.ok(customerDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class CustomerResource {
 
         if (optionalCustomer.isPresent()) {
             customerServices.update(customerDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            customerDto.setLinks(Arrays.asList(self));
             return Response.ok(customerDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class CustomerResource {
         if (optionalCustomer.isPresent()) {
             CustomerDto customerDto = customerServices.getById(id);
             customerServices.delete(customerDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            customerDto.setLinks(Arrays.asList(self));
             return Response.ok(customerDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

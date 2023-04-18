@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.LanguageDto;
 import iti.jets.service.dtos.StoreDto;
 import iti.jets.service.impls.StoreServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class StoreResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<StoreDto> listOfStoreDto = storeServices.getAll();
+        for (StoreDto storeDto : listOfStoreDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            storeDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfStoreDto).build();
     }
 
@@ -30,6 +33,8 @@ public class StoreResource {
 
         if (optionalStore.isPresent()) {
             StoreDto storeDto = optionalStore.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            storeDto.setLinks(Arrays.asList(self));
             return Response.ok(storeDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class StoreResource {
 
         if (optionalStore.isPresent()) {
             storeServices.update(storeDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            storeDto.setLinks(Arrays.asList(self));
             return Response.ok(storeDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class StoreResource {
         if (optionalStore.isPresent()) {
             StoreDto storeDto = storeServices.getById(id);
             storeServices.delete(storeDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            storeDto.setLinks(Arrays.asList(self));
             return Response.ok(storeDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

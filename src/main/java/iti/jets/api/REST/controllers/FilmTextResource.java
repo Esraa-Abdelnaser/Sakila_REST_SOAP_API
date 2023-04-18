@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.FilmTextDto;
 import iti.jets.service.impls.FilmTextServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class FilmTextResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<FilmTextDto> listOfFilmTextDto = filmTextServices.getAll();
+        for (FilmTextDto filmTextDto : listOfFilmTextDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmTextDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfFilmTextDto).build();
     }
 
@@ -30,6 +33,8 @@ public class FilmTextResource {
 
         if (optionalFilmText.isPresent()) {
             FilmTextDto filmTextDto = optionalFilmText.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmTextDto.setLinks(Arrays.asList(self));
             return Response.ok(filmTextDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class FilmTextResource {
 
         if (optionalFilmText.isPresent()) {
             filmTextServices.update(filmTextDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmTextDto.setLinks(Arrays.asList(self));
             return Response.ok(filmTextDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class FilmTextResource {
         if (optionalFilmText.isPresent()) {
             FilmTextDto filmTextDto = filmTextServices.getById(id);
             filmTextServices.delete(filmTextDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmTextDto.setLinks(Arrays.asList(self));
             return Response.ok(filmTextDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

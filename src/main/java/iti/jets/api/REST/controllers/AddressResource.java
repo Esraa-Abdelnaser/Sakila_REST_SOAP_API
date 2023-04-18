@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.impls.AddressServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,6 +19,10 @@ public class AddressResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<AddressDto> listOfAddressDto = addressServices.getAll();
+        for (AddressDto addressDto : listOfAddressDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            addressDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfAddressDto).build();
     }
 
@@ -31,6 +34,8 @@ public class AddressResource {
 
         if (optionalAddress.isPresent()) {
             AddressDto addressDto = optionalAddress.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            addressDto.setLinks(Arrays.asList(self));
             return Response.ok(addressDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -56,6 +61,8 @@ public class AddressResource {
 
         if (optionalAddress.isPresent()) {
             addressServices.update(addressDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            addressDto.setLinks(Arrays.asList(self));
             return Response.ok(addressDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -69,6 +76,8 @@ public class AddressResource {
         if (optionalAddress.isPresent()) {
             AddressDto addressDto = addressServices.getById(id);
             addressServices.delete(addressDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            addressDto.setLinks(Arrays.asList(self));
             return Response.ok(addressDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

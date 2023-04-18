@@ -1,15 +1,14 @@
 package iti.jets.api.REST.controllers;
 
 import iti.jets.database.entities.Category;
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.CategoryDto;
 import iti.jets.service.dtos.CategoryDto;
 import iti.jets.service.impls.CategoryServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +21,10 @@ public class CategoryResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<CategoryDto> listOfCategoryDto = categoryServices.getAll();
+        for (CategoryDto categoryDto : listOfCategoryDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            categoryDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfCategoryDto).build();
     }
 
@@ -32,8 +35,10 @@ public class CategoryResource {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
 
         if (optionalCategory.isPresent()) {
-            CategoryDto CategoryDto = optionalCategory.get();
-            return Response.ok(CategoryDto).build();
+            CategoryDto categoryDto = optionalCategory.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            categoryDto.setLinks(Arrays.asList(self));
+            return Response.ok(categoryDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -53,12 +58,14 @@ public class CategoryResource {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response update(CategoryDto CategoryDto, @Context UriInfo uriInfo) {
-        Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(CategoryDto.getId()));
+    public Response update(CategoryDto categoryDto, @Context UriInfo uriInfo) {
+        Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(categoryDto.getId()));
 
         if (optionalCategory.isPresent()) {
-            categoryServices.update(CategoryDto);
-            return Response.ok(CategoryDto).build();
+            categoryServices.update(categoryDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            categoryDto.setLinks(Arrays.asList(self));
+            return Response.ok(categoryDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
@@ -69,9 +76,11 @@ public class CategoryResource {
     public Response delete(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
         if (optionalCategory.isPresent()) {
-            CategoryDto CategoryDto = categoryServices.getById(id);
-            categoryServices.delete(CategoryDto);
-            return Response.ok(CategoryDto).build();
+            CategoryDto categoryDto = categoryServices.getById(id);
+            categoryServices.delete(categoryDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            categoryDto.setLinks(Arrays.asList(self));
+            return Response.ok(categoryDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

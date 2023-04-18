@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.LanguageDto;
 import iti.jets.service.impls.LanguageServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class LanguageResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<LanguageDto> listOfLanguageDto = languageServices.getAll();
+        for (LanguageDto languageDto : listOfLanguageDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            languageDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfLanguageDto).build();
     }
 
@@ -30,6 +33,8 @@ public class LanguageResource {
 
         if (optionalLanguage.isPresent()) {
             LanguageDto languageDto = optionalLanguage.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            languageDto.setLinks(Arrays.asList(self));
             return Response.ok(languageDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class LanguageResource {
 
         if (optionalLanguage.isPresent()) {
             languageServices.update(languageDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            languageDto.setLinks(Arrays.asList(self));
             return Response.ok(languageDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class LanguageResource {
         if (optionalLanguage.isPresent()) {
             LanguageDto languageDto = languageServices.getById(id);
             languageServices.delete(languageDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            languageDto.setLinks(Arrays.asList(self));
             return Response.ok(languageDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

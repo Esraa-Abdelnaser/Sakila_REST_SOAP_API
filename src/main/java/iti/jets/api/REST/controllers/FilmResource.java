@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.FilmDto;
 import iti.jets.service.impls.FilmServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class FilmResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<FilmDto> listOfFilmDto = filmServices.getAll();
+        for (FilmDto filmDto : listOfFilmDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfFilmDto).build();
     }
 
@@ -30,6 +33,8 @@ public class FilmResource {
 
         if (optionalFilm.isPresent()) {
             FilmDto filmDto = optionalFilm.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
             return Response.ok(filmDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -44,6 +49,8 @@ public class FilmResource {
 
         if (optionalFilm.isPresent()) {
             FilmDto filmDto = optionalFilm.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
             return Response.ok(filmServices.getActorsForFilm(filmDto)).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -69,6 +76,8 @@ public class FilmResource {
 
         if (optionalFilm.isPresent()) {
             filmServices.update(filmDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
             return Response.ok(filmDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -82,6 +91,8 @@ public class FilmResource {
         if (optionalFilm.isPresent()) {
             FilmDto filmDto = filmServices.getById(id);
             filmServices.delete(filmDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
             return Response.ok(filmDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

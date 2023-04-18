@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.LanguageDto;
 import iti.jets.service.dtos.PaymentDto;
 import iti.jets.service.impls.PaymentServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class PaymentResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<PaymentDto> listOfPaymentDto = paymentServices.getAll();
+        for (PaymentDto paymentDto : listOfPaymentDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            paymentDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfPaymentDto).build();
     }
 
@@ -30,6 +33,8 @@ public class PaymentResource {
 
         if (optionalPayment.isPresent()) {
             PaymentDto paymentDto = optionalPayment.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            paymentDto.setLinks(Arrays.asList(self));
             return Response.ok(paymentDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class PaymentResource {
 
         if (optionalPayment.isPresent()) {
             paymentServices.update(paymentDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            paymentDto.setLinks(Arrays.asList(self));
             return Response.ok(paymentDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class PaymentResource {
         if (optionalPayment.isPresent()) {
             PaymentDto paymentDto = paymentServices.getById(id);
             paymentServices.delete(paymentDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            paymentDto.setLinks(Arrays.asList(self));
             return Response.ok(paymentDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

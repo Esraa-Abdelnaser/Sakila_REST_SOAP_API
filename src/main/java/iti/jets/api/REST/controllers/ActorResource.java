@@ -48,8 +48,6 @@ public class ActorResource {
 
         if (optionalActor.isPresent()) {
             ActorDto actorDto = optionalActor.get();
-            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
-            actorDto.setLinks(Arrays.asList(self));
             return Response.ok(actorServices.getfilmsForActor(actorDto)).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

@@ -1,13 +1,12 @@
 package iti.jets.api.REST.controllers;
 
+import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.CityDto;
 import iti.jets.service.impls.CityServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +18,10 @@ public class CityResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<CityDto> listOfCityDto = cityServices.getAll();
+        for (CityDto cityDto : listOfCityDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            cityDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfCityDto).build();
     }
 
@@ -30,6 +33,8 @@ public class CityResource {
 
         if (optionalCity.isPresent()) {
             CityDto cityDto = optionalCity.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            cityDto.setLinks(Arrays.asList(self));
             return Response.ok(cityDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -55,6 +60,8 @@ public class CityResource {
 
         if (optionalCity.isPresent()) {
             cityServices.update(cityDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            cityDto.setLinks(Arrays.asList(self));
             return Response.ok(cityDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -68,6 +75,8 @@ public class CityResource {
         if (optionalCity.isPresent()) {
             CityDto cityDto = cityServices.getById(id);
             cityServices.delete(cityDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            cityDto.setLinks(Arrays.asList(self));
             return Response.ok(cityDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();

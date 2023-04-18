@@ -44,6 +44,7 @@ public class StoreServicesImpl implements StoreServices {
 
     @Override
     public void delete(StoreDto storeDto) {
-        storeRepo.delete(mapper.toEntity(storeDto));
+
+        storeRepo.delete(storeRepo.getById(storeDto.getId()));
     }
 }

@@ -58,6 +58,7 @@ public class FilmServicesImpl implements FilmServices {
 
     @Override
     public void delete(FilmDto filmDto) {
-        filmRepo.delete(mapper.toEntity(filmDto));
+
+        filmRepo.delete(filmRepo.getById(filmDto.getId()));
     }
 }

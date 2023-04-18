@@ -44,6 +44,7 @@ public class CityServicesImpl implements CityServices {
 
     @Override
     public void delete(CityDto cityDto) {
-        cityRepo.delete(mapper.toEntity(cityDto));
+
+        cityRepo.delete(cityRepo.getById(cityDto.getId()));
     }
 }

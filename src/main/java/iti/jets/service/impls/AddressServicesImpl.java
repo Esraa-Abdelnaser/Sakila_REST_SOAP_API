@@ -44,6 +44,7 @@ public class AddressServicesImpl implements AddressServices {
 
     @Override
     public void delete(AddressDto addressDto) {
-        addressRepo.delete(mapper.toEntity(addressDto));
+
+        addressRepo.delete(addressRepo.getById(addressDto.getId()));
     }
 }

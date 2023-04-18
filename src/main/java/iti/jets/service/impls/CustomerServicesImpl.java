@@ -44,6 +44,7 @@ public class CustomerServicesImpl implements CustomerServices {
 
     @Override
     public void delete(CustomerDto customerDto) {
-        customerRepo.delete(mapper.toEntity(customerDto));
+
+        customerRepo.delete(customerRepo.getById(customerDto.getId()));
     }
 }

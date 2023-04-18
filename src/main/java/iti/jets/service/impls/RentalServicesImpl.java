@@ -44,6 +44,7 @@ public class RentalServicesImpl implements RentalServices {
 
     @Override
     public void delete(RentalDto rentalDto) {
-        rentalRepo.delete(mapper.toEntity(rentalDto));
+
+        rentalRepo.delete(rentalRepo.getById(rentalDto.getId()));
     }
 }

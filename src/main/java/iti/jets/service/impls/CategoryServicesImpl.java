@@ -44,6 +44,6 @@ public class CategoryServicesImpl implements CategoryServices {
 
     @Override
     public void delete(CategoryDto categoryDto) {
-        categoryRepo.delete(mapper.toEntity(categoryDto));
+        categoryRepo.delete(categoryRepo.getById(categoryDto.getId()));
     }
 }

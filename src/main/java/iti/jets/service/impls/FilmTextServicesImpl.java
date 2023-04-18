@@ -44,6 +44,7 @@ public class FilmTextServicesImpl implements FilmTextServices {
 
     @Override
     public void delete(FilmTextDto filmTextDto) {
-        filmTextRepo.delete(mapper.toEntity(filmTextDto));
+
+        filmTextRepo.delete(filmTextRepo.getById(filmTextDto.getId()));
     }
 }

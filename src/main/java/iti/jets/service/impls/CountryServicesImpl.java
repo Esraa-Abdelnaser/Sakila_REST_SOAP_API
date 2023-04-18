@@ -44,6 +44,7 @@ public class CountryServicesImpl implements CountryServices {
 
     @Override
     public void delete(CountryDto countryDto) {
-        countryRepo.delete(mapper.toEntity(countryDto));
+
+        countryRepo.delete(countryRepo.getById(countryDto.getId()));
     }
 }

@@ -44,6 +44,6 @@ public class StaffServicesImpl implements StaffServices {
 
     @Override
     public void delete(StaffDto staffDto) {
-        staffRepo.delete(mapper.toEntity(staffDto));
+        staffRepo.delete(staffRepo.getById(staffDto.getId()));
     }
 }

@@ -44,6 +44,7 @@ public class InventoryServicesImpl implements InventoryServices {
 
     @Override
     public void delete(InventoryDto inventoryDto) {
-        inventoryRepo.delete(mapper.toEntity(inventoryDto));
+
+        inventoryRepo.delete(inventoryRepo.getById(inventoryDto.getId()));
     }
 }

@@ -44,6 +44,7 @@ public class LanguageServicesImpl implements LanguageServices {
 
     @Override
     public void delete(LanguageDto languageDto) {
-        languageRepo.delete(mapper.toEntity(languageDto));
+
+        languageRepo.delete(languageRepo.getById(languageDto.getId()));
     }
 }

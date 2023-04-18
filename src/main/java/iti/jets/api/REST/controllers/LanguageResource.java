@@ -68,7 +68,9 @@ public class LanguageResource {
         if (optionalLanguage.isPresent()) {
             LanguageDto languageDto = languageServices.getById(id);
             languageServices.delete(languageDto);
+            return Response.ok(languageDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

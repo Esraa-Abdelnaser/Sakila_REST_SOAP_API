@@ -68,7 +68,9 @@ public class CityResource {
         if (optionalCity.isPresent()) {
             CityDto cityDto = cityServices.getById(id);
             cityServices.delete(cityDto);
+            return Response.ok(cityDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

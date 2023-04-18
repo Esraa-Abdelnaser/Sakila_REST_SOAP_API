@@ -82,7 +82,9 @@ public class FilmResource {
         if (optionalFilm.isPresent()) {
             FilmDto filmDto = filmServices.getById(id);
             filmServices.delete(filmDto);
+            return Response.ok(filmDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

@@ -69,7 +69,9 @@ public class AddressResource {
         if (optionalAddress.isPresent()) {
             AddressDto addressDto = addressServices.getById(id);
             addressServices.delete(addressDto);
+            return Response.ok(addressDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

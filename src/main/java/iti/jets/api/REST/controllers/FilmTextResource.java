@@ -68,7 +68,9 @@ public class FilmTextResource {
         if (optionalFilmText.isPresent()) {
             FilmTextDto filmTextDto = filmTextServices.getById(id);
             filmTextServices.delete(filmTextDto);
+            return Response.ok(filmTextDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

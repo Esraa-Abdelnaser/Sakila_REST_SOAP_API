@@ -68,7 +68,9 @@ public class StoreResource {
         if (optionalStore.isPresent()) {
             StoreDto storeDto = storeServices.getById(id);
             storeServices.delete(storeDto);
+            return Response.ok(storeDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

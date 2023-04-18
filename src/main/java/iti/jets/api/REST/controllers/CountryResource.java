@@ -69,7 +69,9 @@ public class CountryResource {
         if (optionalCountry.isPresent()) {
             CountryDto countryDto = countryServices.getById(id);
             countryServices.delete(countryDto);
+            return Response.ok(countryDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

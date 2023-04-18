@@ -68,7 +68,9 @@ public class RentalResource {
         if (optionalRental.isPresent()) {
             RentalDto rentalDto = rentalServices.getById(id);
             rentalServices.delete(rentalDto);
+            return Response.ok(rentalDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

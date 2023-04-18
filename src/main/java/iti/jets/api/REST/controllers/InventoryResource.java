@@ -68,7 +68,9 @@ public class InventoryResource {
         if (optionalInventory.isPresent()) {
             InventoryDto inventoryDto = inventoryServices.getById(id);
             inventoryServices.delete(inventoryDto);
+            return Response.ok(inventoryDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

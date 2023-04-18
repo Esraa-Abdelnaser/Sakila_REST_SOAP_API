@@ -68,7 +68,9 @@ public class StaffResource {
         if (optionalStaff.isPresent()) {
             StaffDto staffDto = staffServices.getById(id);
             staffServices.delete(staffDto);
+            return Response.ok(staffDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

@@ -3,11 +3,9 @@ package iti.jets.api.REST.controllers;
 import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.impls.ActorServicesImpl;
 import jakarta.ws.rs.*;
-import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
-import jakarta.ws.rs.core.UriInfo;
+import jakarta.ws.rs.core.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,6 +17,10 @@ public class ActorResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAll(@Context UriInfo uriInfo) {
         List<ActorDto> listOfActorDto = actorServices.getAll();
+        for (ActorDto actorDto : listOfActorDto) {
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            actorDto.setLinks(Arrays.asList(self));
+        }
         return Response.ok(listOfActorDto).build();
     }
 
@@ -30,6 +32,8 @@ public class ActorResource {
 
         if (optionalActor.isPresent()) {
             ActorDto actorDto = optionalActor.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            actorDto.setLinks(Arrays.asList(self));
             return Response.ok(actorDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -44,6 +48,8 @@ public class ActorResource {
 
         if (optionalActor.isPresent()) {
             ActorDto actorDto = optionalActor.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            actorDto.setLinks(Arrays.asList(self));
             return Response.ok(actorServices.getfilmsForActor(actorDto)).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -69,6 +75,8 @@ public class ActorResource {
 
         if (optionalActor.isPresent()) {
             actorServices.update(actorDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            actorDto.setLinks(Arrays.asList(self));
             return Response.ok(actorDto).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -82,7 +90,11 @@ public class ActorResource {
         if (optionalActor.isPresent()) {
             ActorDto actorDto = actorServices.getById(id);
             actorServices.delete(actorDto);
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            actorDto.setLinks(Arrays.asList(self));
+            return Response.ok(actorDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

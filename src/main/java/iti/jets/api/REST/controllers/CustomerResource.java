@@ -68,7 +68,9 @@ public class CustomerResource {
         if (optionalCustomer.isPresent()) {
             CustomerDto customerDto = customerServices.getById(id);
             customerServices.delete(customerDto);
+            return Response.ok(customerDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.noContent().build();
     }
 }

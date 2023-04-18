@@ -1,6 +1,7 @@
 package iti.jets.service.interfaces;
 
 import iti.jets.service.dtos.ActorDto;
+import iti.jets.service.dtos.FilmDto;
 
 import java.util.List;
 
@@ -15,5 +16,7 @@ public interface ActorServices {
     void update(ActorDto actorDto);
 
     void delete(ActorDto actorDto);
+
+    List<FilmDto> getfilmsForActor(ActorDto actorDto);
 
 }

@@ -1,6 +1,7 @@
 package iti.jets.api.REST.controllers;
 
 import iti.jets.database.entities.Category;
+import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.dtos.AddressDto;
 import iti.jets.service.dtos.CategoryDto;
 import iti.jets.service.dtos.CategoryDto;
@@ -39,6 +40,20 @@ public class CategoryResource {
             Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
             categoryDto.setLinks(Arrays.asList(self));
             return Response.ok(categoryDto).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
+    @GET
+    @Path("categoryOfActor/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getfilmsForCategory(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+        Optional<CategoryDto> optionalActor = Optional.ofNullable(categoryServices.getById(id));
+
+        if (optionalActor.isPresent()) {
+            CategoryDto categoryDto = optionalActor.get();
+            return Response.ok(categoryServices.getCategoryForActor(categoryDto)).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }

@@ -1,11 +1,16 @@
 package iti.jets.service.impls;
 
 import iti.jets.database.entities.Category;
+import iti.jets.database.entities.FilmActor;
+import iti.jets.database.entities.FilmCategory;
 import iti.jets.database.repos.impls.CategoryRepoImpl;
+import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.dtos.CategoryDto;
+import iti.jets.service.dtos.FilmDto;
 import iti.jets.service.interfaces.CategoryServices;
 import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.CategoryMapper;
+import iti.jets.utils.mappers.FilmMapper;
 import jakarta.persistence.EntityManager;
 
 import java.util.ArrayList;
@@ -30,6 +35,17 @@ public class CategoryServicesImpl implements CategoryServices {
     @Override
     public CategoryDto getById(Integer id) {
         return mapper.toDto(categoryRepo.getById(id));
+    }
+
+    @Override
+    public List<FilmDto> getCategoryForActor(CategoryDto categoryDto) {
+        List<FilmCategory> listOfFilmCategory = categoryRepo.getById(mapper.toEntity(categoryDto).getId()).getFilmCategoryList();
+        List<FilmDto> listOfFilm = new ArrayList<>();
+        FilmMapper filmMapper = FilmMapper.INSTANCE;
+        for (FilmCategory filmCategory: listOfFilmCategory) {
+            listOfFilm.add(filmMapper.toDto(filmCategory.getFilm()));
+        }
+        return listOfFilm;
     }
 
     @Override

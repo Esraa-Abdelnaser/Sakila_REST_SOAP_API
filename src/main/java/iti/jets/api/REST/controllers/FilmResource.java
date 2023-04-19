@@ -57,6 +57,21 @@ public class FilmResource {
         }
     }
 
+    @GET
+    @Path("categoriesOfFilm/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getCategoriesForFilm(@PathParam("id") Integer id, @Context UriInfo uriInfo) {
+        Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(id));
+        if (optionalFilm.isPresent()) {
+            FilmDto filmDto = optionalFilm.get();
+            Link self = Link.fromUriBuilder(uriInfo.getAbsolutePathBuilder()).rel("self").build();
+            filmDto.setLinks(Arrays.asList(self));
+            return Response.ok(filmServices.getCategoriesForFilm(filmDto)).build();
+        } else {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+    }
+
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     public Response insert(FilmDto filmDto, @Context UriInfo uriInfo) {

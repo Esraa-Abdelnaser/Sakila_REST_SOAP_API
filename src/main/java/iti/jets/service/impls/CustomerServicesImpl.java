@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.CustomerMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class CustomerServicesImpl implements CustomerServices {
 
     @Override
     public void insert(CustomerDto customerDto) {
+        customerDto.setLastUpdate(Instant.now());
         customerRepo.insert(mapper.toEntity(customerDto));
     }
 
     @Override
     public void update(CustomerDto customerDto) {
+        customerDto.setLastUpdate(Instant.now());
         customerRepo.update(mapper.toEntity(customerDto));
     }
 

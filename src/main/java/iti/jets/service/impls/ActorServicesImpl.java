@@ -56,6 +56,7 @@ public class ActorServicesImpl implements ActorServices {
 
     @Override
     public void update(ActorDto actorDto) {
+        actorDto.setLastUpdate(Instant.now());
         actorRepoImpl.update(mapper.toEntity(actorDto));
     }
 

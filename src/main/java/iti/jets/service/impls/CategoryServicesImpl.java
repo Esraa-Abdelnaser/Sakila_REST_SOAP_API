@@ -13,6 +13,7 @@ import iti.jets.utils.mappers.CategoryMapper;
 import iti.jets.utils.mappers.FilmMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,11 +51,13 @@ public class CategoryServicesImpl implements CategoryServices {
 
     @Override
     public void insert(CategoryDto categoryDto) {
+        categoryDto.setLastUpdate(Instant.now());
         categoryRepo.insert(mapper.toEntity(categoryDto));
     }
 
     @Override
     public void update(CategoryDto categoryDto) {
+        categoryDto.setLastUpdate(Instant.now());
         categoryRepo.update(mapper.toEntity(categoryDto));
     }
 

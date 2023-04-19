@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.CityMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class CityServicesImpl implements CityServices {
 
     @Override
     public void insert(CityDto cityDto) {
+        cityDto.setLastUpdate(Instant.now());
         cityRepo.insert(mapper.toEntity(cityDto));
     }
 
     @Override
     public void update(CityDto cityDto) {
+        cityDto.setLastUpdate(Instant.now());
         cityRepo.update(mapper.toEntity(cityDto));
     }
 

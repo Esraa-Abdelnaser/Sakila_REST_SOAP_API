@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.AddressMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class AddressServicesImpl implements AddressServices {
 
     @Override
     public void insert(AddressDto addressDto) {
+        addressDto.setLastUpdate(Instant.now());
         addressRepo.insert(mapper.toEntity(addressDto));
     }
 
     @Override
     public void update(AddressDto addressDto) {
+        addressDto.setLastUpdate(Instant.now());
         addressRepo.update(mapper.toEntity(addressDto));
     }
 

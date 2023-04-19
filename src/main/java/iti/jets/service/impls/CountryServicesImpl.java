@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.CountryMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class CountryServicesImpl implements CountryServices {
 
     @Override
     public void insert(CountryDto countryDto) {
+        countryDto.setLastUpdate(Instant.now());
         countryRepo.insert(mapper.toEntity(countryDto));
     }
 
     @Override
     public void update(CountryDto countryDto) {
+        countryDto.setLastUpdate(Instant.now());
         countryRepo.update(mapper.toEntity(countryDto));
     }
 

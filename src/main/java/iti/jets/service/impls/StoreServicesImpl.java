@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.StoreMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class StoreServicesImpl implements StoreServices {
 
     @Override
     public void insert(StoreDto storeDto) {
+        storeDto.setLastUpdate(Instant.now());
         storeRepo.insert(mapper.toEntity(storeDto));
     }
 
     @Override
     public void update(StoreDto storeDto) {
+        storeDto.setLastUpdate(Instant.now());
         storeRepo.update(mapper.toEntity(storeDto));
     }
 

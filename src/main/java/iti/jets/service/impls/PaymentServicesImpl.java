@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.PaymentMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class PaymentServicesImpl implements PaymentServices {
 
     @Override
     public void insert(PaymentDto paymentDto) {
+        paymentDto.setLastUpdate(Instant.now());
         paymentRepo.insert(mapper.toEntity(paymentDto));
     }
 
     @Override
     public void update(PaymentDto paymentDto) {
+        paymentDto.setLastUpdate(Instant.now());
         paymentRepo.update(mapper.toEntity(paymentDto));
     }
 

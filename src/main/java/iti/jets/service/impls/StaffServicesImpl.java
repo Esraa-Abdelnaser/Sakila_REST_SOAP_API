@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.StaffMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class StaffServicesImpl implements StaffServices {
 
     @Override
     public void insert(StaffDto staffDto) {
+        staffDto.setLastUpdate(Instant.now());
         staffRepo.insert(mapper.toEntity(staffDto));
     }
 
     @Override
     public void update(StaffDto staffDto) {
+        staffDto.setLastUpdate(Instant.now());
         staffRepo.update(mapper.toEntity(staffDto));
     }
 

@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.LanguageMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class LanguageServicesImpl implements LanguageServices {
 
     @Override
     public void insert(LanguageDto languageDto) {
+        languageDto.setLastUpdate(Instant.now());
         languageRepo.insert(mapper.toEntity(languageDto));
     }
 
     @Override
     public void update(LanguageDto languageDto) {
+        languageDto.setLastUpdate(Instant.now());
         languageRepo.update(mapper.toEntity(languageDto));
     }
 

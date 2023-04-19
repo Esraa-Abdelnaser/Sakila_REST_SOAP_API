@@ -14,6 +14,7 @@ import iti.jets.utils.mappers.CategoryMapper;
 import iti.jets.utils.mappers.FilmMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public class FilmServicesImpl implements FilmServices {
         List<FilmActor> listOfFilmActor = filmRepo.getById(mapper.toEntity(FilmDto).getId()).getFilmActorList();
         List<ActorDto> listOfActors = new ArrayList<>();
         ActorMapper actorMapper = ActorMapper.INSTANCE;
-        for (FilmActor filmActor: listOfFilmActor) {
+        for (FilmActor filmActor : listOfFilmActor) {
             listOfActors.add(actorMapper.toDto(filmActor.getActor()));
         }
         return listOfActors;
@@ -49,11 +50,12 @@ public class FilmServicesImpl implements FilmServices {
         List<FilmCategory> listOfFilmCategory = filmRepo.getById(mapper.toEntity(FilmDto).getId()).getFilmCategoryList();
         List<CategoryDto> listOfCategories = new ArrayList<>();
         CategoryMapper categoryMapper = CategoryMapper.INSTANCE;
-        for (FilmCategory filmCategory: listOfFilmCategory) {
+        for (FilmCategory filmCategory : listOfFilmCategory) {
             listOfCategories.add(categoryMapper.toDto(filmCategory.getCategory()));
         }
         return listOfCategories;
     }
+
     @Override
     public FilmDto getById(Integer id) {
         return mapper.toDto(filmRepo.getById(id));
@@ -61,11 +63,13 @@ public class FilmServicesImpl implements FilmServices {
 
     @Override
     public void insert(FilmDto filmDto) {
+        filmDto.setLastUpdate(Instant.now());
         filmRepo.insert(mapper.toEntity(filmDto));
     }
 
     @Override
     public void update(FilmDto filmDto) {
+        filmDto.setLastUpdate(Instant.now());
         filmRepo.update(mapper.toEntity(filmDto));
     }
 

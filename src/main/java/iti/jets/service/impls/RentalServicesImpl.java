@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.RentalMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class RentalServicesImpl implements RentalServices {
 
     @Override
     public void insert(RentalDto rentalDto) {
+        rentalDto.setLastUpdate(Instant.now());
         rentalRepo.insert(mapper.toEntity(rentalDto));
     }
 
     @Override
     public void update(RentalDto rentalDto) {
+        rentalDto.setLastUpdate(Instant.now());
         rentalRepo.update(mapper.toEntity(rentalDto));
     }
 

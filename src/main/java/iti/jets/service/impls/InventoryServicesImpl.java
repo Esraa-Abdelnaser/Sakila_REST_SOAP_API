@@ -8,6 +8,7 @@ import iti.jets.utils.SingletonEntityManager;
 import iti.jets.utils.mappers.InventoryMapper;
 import jakarta.persistence.EntityManager;
 
+import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,11 +35,13 @@ public class InventoryServicesImpl implements InventoryServices {
 
     @Override
     public void insert(InventoryDto inventoryDto) {
+        inventoryDto.setLastUpdate(Instant.now());
         inventoryRepo.insert(mapper.toEntity(inventoryDto));
     }
 
     @Override
     public void update(InventoryDto inventoryDto) {
+        inventoryDto.setLastUpdate(Instant.now());
         inventoryRepo.update(mapper.toEntity(inventoryDto));
     }
 

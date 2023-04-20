@@ -14,13 +14,13 @@ public class InventorySoapService {
     private InventoryServicesImpl inventoryServices = new InventoryServicesImpl();
 
     @WebMethod
-    public List<InventoryDto> getAll() {
+    public List<InventoryDto> getAllInventories() {
         List<InventoryDto> listOfInventoryDto = inventoryServices.getAll();
         return listOfInventoryDto;
     }
 
     @WebMethod
-    public InventoryDto getById(@WebParam(name = "id") Integer id) {
+    public InventoryDto getInventoryById(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
 
         if (optionalInventory.isPresent()) {
@@ -32,7 +32,7 @@ public class InventorySoapService {
     }
 
     @WebMethod
-    public String insert(InventoryDto inventoryDto) {
+    public String insertInventory(InventoryDto inventoryDto) {
 
         try {
             inventoryServices.insert(inventoryDto);
@@ -43,7 +43,7 @@ public class InventorySoapService {
     }
 
     @WebMethod
-    public InventoryDto update(InventoryDto inventoryDto) {
+    public InventoryDto updateInventory(InventoryDto inventoryDto) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(inventoryDto.getId()));
 
         if (optionalInventory.isPresent()) {
@@ -55,7 +55,7 @@ public class InventorySoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteInventory(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
         try {
             if (optionalInventory.isPresent()) {

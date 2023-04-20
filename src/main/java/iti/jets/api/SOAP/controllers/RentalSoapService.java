@@ -14,13 +14,13 @@ public class RentalSoapService {
     private RentalServicesImpl rentalServices = new RentalServicesImpl();
 
     @WebMethod
-    public List<RentalDto> getAll() {
+    public List<RentalDto> getAllRentals() {
         List<RentalDto> listOfRentalDto = rentalServices.getAll();
         return listOfRentalDto;
     }
 
     @WebMethod
-    public RentalDto getById(@WebParam(name = "id") Integer id) {
+    public RentalDto getRentalById(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
 
         if (optionalRental.isPresent()) {
@@ -32,7 +32,7 @@ public class RentalSoapService {
     }
 
     @WebMethod
-    public String insert(RentalDto rentalDto) {
+    public String insertRental(RentalDto rentalDto) {
 
         try {
             rentalServices.insert(rentalDto);
@@ -43,7 +43,7 @@ public class RentalSoapService {
     }
 
     @WebMethod
-    public RentalDto update(RentalDto rentalDto) {
+    public RentalDto updateRental(RentalDto rentalDto) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(rentalDto.getId()));
 
         if (optionalRental.isPresent()) {
@@ -55,7 +55,7 @@ public class RentalSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteRental(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
         try {
             if (optionalRental.isPresent()) {

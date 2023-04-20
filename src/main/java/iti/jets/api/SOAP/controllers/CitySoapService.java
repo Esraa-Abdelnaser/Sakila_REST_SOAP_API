@@ -14,13 +14,13 @@ public class CitySoapService {
     private CityServicesImpl cityServices = new CityServicesImpl();
 
     @WebMethod
-    public List<CityDto> getAll() {
+    public List<CityDto> getAllCities() {
         List<CityDto> listOfCityDto = cityServices.getAll();
         return listOfCityDto;
     }
 
     @WebMethod
-    public CityDto getById(@WebParam(name = "id") Integer id) {
+    public CityDto getCityById(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
 
         if (optionalCity.isPresent()) {
@@ -32,7 +32,7 @@ public class CitySoapService {
     }
 
     @WebMethod
-    public String insert(CityDto cityDto) {
+    public String insertCity(CityDto cityDto) {
 
         try {
             cityServices.insert(cityDto);
@@ -43,7 +43,7 @@ public class CitySoapService {
     }
 
     @WebMethod
-    public CityDto update(CityDto cityDto) {
+    public CityDto updateCity(CityDto cityDto) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(cityDto.getId()));
 
         if (optionalCity.isPresent()) {
@@ -55,7 +55,7 @@ public class CitySoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteCity(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
         try {
             if (optionalCity.isPresent()) {

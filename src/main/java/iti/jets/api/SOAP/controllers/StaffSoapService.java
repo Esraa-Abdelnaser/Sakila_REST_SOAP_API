@@ -14,13 +14,13 @@ public class StaffSoapService {
     private StaffServicesImpl staffServices = new StaffServicesImpl();
 
     @WebMethod
-    public List<StaffDto> getAll() {
+    public List<StaffDto> getAllStaff() {
         List<StaffDto> listOfStaffDto = staffServices.getAll();
         return listOfStaffDto;
     }
 
     @WebMethod
-    public StaffDto getById(@WebParam(name = "id") Integer id) {
+    public StaffDto getStaffById(@WebParam(name = "id") Integer id) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(id));
 
         if (optionalStaff.isPresent()) {
@@ -32,7 +32,7 @@ public class StaffSoapService {
     }
 
     @WebMethod
-    public String insert(StaffDto staffDto) {
+    public String insertStaff(StaffDto staffDto) {
 
         try {
             staffServices.insert(staffDto);
@@ -43,7 +43,7 @@ public class StaffSoapService {
     }
 
     @WebMethod
-    public StaffDto update(StaffDto staffDto) {
+    public StaffDto updateStaff(StaffDto staffDto) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(staffDto.getId()));
 
         if (optionalStaff.isPresent()) {
@@ -55,7 +55,7 @@ public class StaffSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteStaff(@WebParam(name = "id") Integer id) {
         Optional<StaffDto> optionalStaff = Optional.ofNullable(staffServices.getById(id));
         try {
             if (optionalStaff.isPresent()) {

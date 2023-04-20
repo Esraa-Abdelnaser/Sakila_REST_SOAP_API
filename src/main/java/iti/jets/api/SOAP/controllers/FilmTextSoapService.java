@@ -14,13 +14,13 @@ public class FilmTextSoapService {
     private FilmTextServicesImpl filmTextServices = new FilmTextServicesImpl();
 
     @WebMethod
-    public List<FilmTextDto> getAll() {
+    public List<FilmTextDto> getAllFilmTexts() {
         List<FilmTextDto> listOfFilmTextDto = filmTextServices.getAll();
         return listOfFilmTextDto;
     }
 
     @WebMethod
-    public FilmTextDto getById(@WebParam(name = "id") Integer id) {
+    public FilmTextDto getFilmTextById(@WebParam(name = "id") Integer id) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(id));
 
         if (optionalFilmText.isPresent()) {
@@ -32,7 +32,7 @@ public class FilmTextSoapService {
     }
 
     @WebMethod
-    public String insert(FilmTextDto filmTextDto) {
+    public String insertFilmText(FilmTextDto filmTextDto) {
 
         try {
             filmTextServices.insert(filmTextDto);
@@ -43,7 +43,7 @@ public class FilmTextSoapService {
     }
 
     @WebMethod
-    public FilmTextDto update(FilmTextDto filmTextDto) {
+    public FilmTextDto updateFilmText(FilmTextDto filmTextDto) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(filmTextDto.getId()));
 
         if (optionalFilmText.isPresent()) {
@@ -55,7 +55,7 @@ public class FilmTextSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteFilmText(@WebParam(name = "id") Integer id) {
         Optional<FilmTextDto> optionalFilmText = Optional.ofNullable(filmTextServices.getById(id));
         try {
             if (optionalFilmText.isPresent()) {

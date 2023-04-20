@@ -14,13 +14,13 @@ public class AddressSoapService {
     private AddressServicesImpl addressServices = new AddressServicesImpl();
 
     @WebMethod
-    public List<AddressDto> getAll() {
+    public List<AddressDto> getAllAddresses() {
         List<AddressDto> listOfAddressDto = addressServices.getAll();
         return listOfAddressDto;
     }
 
     @WebMethod
-    public AddressDto getById(@WebParam(name = "id") Integer id) {
+    public AddressDto getAddressById(@WebParam(name = "id") Integer id) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(id));
 
         if (optionalAddress.isPresent()) {
@@ -32,7 +32,7 @@ public class AddressSoapService {
     }
 
     @WebMethod
-    public String insert(AddressDto addressDto) {
+    public String insertAddress(AddressDto addressDto) {
 
         try {
             addressServices.insert(addressDto);
@@ -43,7 +43,7 @@ public class AddressSoapService {
     }
 
     @WebMethod
-    public AddressDto update(AddressDto addressDto) {
+    public AddressDto updateAddress(AddressDto addressDto) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(addressDto.getId()));
 
         if (optionalAddress.isPresent()) {
@@ -56,7 +56,7 @@ public class AddressSoapService {
 
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteAddress(@WebParam(name = "id") Integer id) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(id));
         try {
             if (optionalAddress.isPresent()) {

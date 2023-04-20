@@ -14,13 +14,13 @@ public class PaymentSoapService {
     private PaymentServicesImpl paymentServices = new PaymentServicesImpl();
 
     @WebMethod
-    public List<PaymentDto> getAll() {
+    public List<PaymentDto> getAllPayments() {
         List<PaymentDto> listOfPaymentDto = paymentServices.getAll();
         return listOfPaymentDto;
     }
 
     @WebMethod
-    public PaymentDto getById(@WebParam(name = "id") Integer id) {
+    public PaymentDto getPaymentById(@WebParam(name = "id") Integer id) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(id));
 
         if (optionalPayment.isPresent()) {
@@ -32,7 +32,7 @@ public class PaymentSoapService {
     }
 
     @WebMethod
-    public String insert(PaymentDto paymentDto) {
+    public String insertPayment(PaymentDto paymentDto) {
 
         try {
             paymentServices.insert(paymentDto);
@@ -43,7 +43,7 @@ public class PaymentSoapService {
     }
 
     @WebMethod
-    public PaymentDto update(PaymentDto paymentDto) {
+    public PaymentDto updatePayment(PaymentDto paymentDto) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(paymentDto.getId()));
 
         if (optionalPayment.isPresent()) {
@@ -55,7 +55,7 @@ public class PaymentSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deletePayment(@WebParam(name = "id") Integer id) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(id));
         try {
             if (optionalPayment.isPresent()) {

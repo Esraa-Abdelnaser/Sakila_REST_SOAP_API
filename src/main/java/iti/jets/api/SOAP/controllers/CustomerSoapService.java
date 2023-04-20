@@ -15,13 +15,13 @@ public class CustomerSoapService {
     private CustomerServicesImpl customerServices = new CustomerServicesImpl();
 
     @WebMethod
-    public List<CustomerDto> getAll() {
+    public List<CustomerDto> getAllCustomers() {
         List<CustomerDto> listOfCustomerDto = customerServices.getAll();
         return listOfCustomerDto;
     }
 
     @WebMethod
-    public CustomerDto getById(@WebParam(name = "id") Integer id) {
+    public CustomerDto getCustomerById(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
 
         if (optionalCustomer.isPresent()) {
@@ -33,7 +33,7 @@ public class CustomerSoapService {
     }
 
     @WebMethod
-    public String insert(CustomerDto customerDto) {
+    public String insertCustomer(CustomerDto customerDto) {
 
         try {
             customerServices.insert(customerDto);
@@ -44,7 +44,7 @@ public class CustomerSoapService {
     }
 
     @WebMethod
-    public CustomerDto update(CustomerDto customerDto) {
+    public CustomerDto updateCustomer(CustomerDto customerDto) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(customerDto.getId()));
 
         if (optionalCustomer.isPresent()) {
@@ -56,7 +56,7 @@ public class CustomerSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteCustomer(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
         try {
             if (optionalCustomer.isPresent()) {

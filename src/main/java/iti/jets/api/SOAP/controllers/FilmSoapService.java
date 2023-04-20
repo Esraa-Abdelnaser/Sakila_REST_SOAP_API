@@ -14,13 +14,13 @@ public class FilmSoapService {
     private FilmServicesImpl filmServices = new FilmServicesImpl();
 
     @WebMethod
-    public List<FilmDto> getAll() {
+    public List<FilmDto> getAllFilms() {
         List<FilmDto> listOfFilmDto = filmServices.getAll();
         return listOfFilmDto;
     }
 
     @WebMethod
-    public FilmDto getById(@WebParam(name = "id") Integer id) {
+    public FilmDto getFilmById(@WebParam(name = "id") Integer id) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(id));
 
         if (optionalFilm.isPresent()) {
@@ -32,7 +32,7 @@ public class FilmSoapService {
     }
 
     @WebMethod
-    public String insert(FilmDto filmDto) {
+    public String insertFilm(FilmDto filmDto) {
 
         try {
             filmServices.insert(filmDto);
@@ -43,7 +43,7 @@ public class FilmSoapService {
     }
 
     @WebMethod
-    public FilmDto update(FilmDto filmDto) {
+    public FilmDto updateFilm(FilmDto filmDto) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(filmDto.getId()));
 
         if (optionalFilm.isPresent()) {
@@ -55,7 +55,7 @@ public class FilmSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteFilm(@WebParam(name = "id") Integer id) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(id));
         try {
             if (optionalFilm.isPresent()) {

@@ -14,13 +14,13 @@ public class StoreSoapService {
     private StoreServicesImpl storeServices = new StoreServicesImpl();
 
     @WebMethod
-    public List<StoreDto> getAll() {
+    public List<StoreDto> getAllStores() {
         List<StoreDto> listOfStoreDto = storeServices.getAll();
         return listOfStoreDto;
     }
 
     @WebMethod
-    public StoreDto getById(@WebParam(name = "id") Integer id) {
+    public StoreDto getStoreById(@WebParam(name = "id") Integer id) {
         Optional<StoreDto> optionalStore = Optional.ofNullable(storeServices.getById(id));
 
         if (optionalStore.isPresent()) {
@@ -32,7 +32,7 @@ public class StoreSoapService {
     }
 
     @WebMethod
-    public String insert(StoreDto storeDto) {
+    public String insertStore(StoreDto storeDto) {
 
         try {
             storeServices.insert(storeDto);
@@ -43,7 +43,7 @@ public class StoreSoapService {
     }
 
     @WebMethod
-    public StoreDto update(StoreDto storeDto) {
+    public StoreDto updateStore(StoreDto storeDto) {
         Optional<StoreDto> optionalStore = Optional.ofNullable(storeServices.getById(storeDto.getId()));
 
         if (optionalStore.isPresent()) {
@@ -55,7 +55,7 @@ public class StoreSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteStore(@WebParam(name = "id") Integer id) {
         Optional<StoreDto> optionalStore = Optional.ofNullable(storeServices.getById(id));
         try {
             if (optionalStore.isPresent()) {

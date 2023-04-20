@@ -14,13 +14,13 @@ public class CountrySoapService {
     private CountryServicesImpl countryServices = new CountryServicesImpl();
 
     @WebMethod
-    public List<CountryDto> getAll() {
+    public List<CountryDto> getAllCountries() {
         List<CountryDto> listOfCountryDto = countryServices.getAll();
         return listOfCountryDto;
     }
 
     @WebMethod
-    public CountryDto getById(@WebParam(name = "id") Integer id) {
+    public CountryDto getCountryById(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
 
         if (optionalCountry.isPresent()) {
@@ -32,7 +32,7 @@ public class CountrySoapService {
     }
 
     @WebMethod
-    public String insert(CountryDto countryDto) {
+    public String insertCountry(CountryDto countryDto) {
 
         try {
             countryServices.insert(countryDto);
@@ -43,7 +43,7 @@ public class CountrySoapService {
     }
 
     @WebMethod
-    public CountryDto update(CountryDto countryDto) {
+    public CountryDto updateCountry(CountryDto countryDto) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(countryDto.getId()));
 
         if (optionalCountry.isPresent()) {
@@ -55,7 +55,7 @@ public class CountrySoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteCountry(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
         try {
             if (optionalCountry.isPresent()) {

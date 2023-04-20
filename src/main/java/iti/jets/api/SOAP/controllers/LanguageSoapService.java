@@ -14,13 +14,13 @@ public class LanguageSoapService {
     private LanguageServicesImpl languageServices = new LanguageServicesImpl();
 
     @WebMethod
-    public List<LanguageDto> getAll() {
+    public List<LanguageDto> getAllLanguages() {
         List<LanguageDto> listOfLanguageDto = languageServices.getAll();
         return listOfLanguageDto;
     }
 
     @WebMethod
-    public LanguageDto getById(@WebParam(name = "id") Integer id) {
+    public LanguageDto getLanguageById(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
 
         if (optionalLanguage.isPresent()) {
@@ -32,7 +32,7 @@ public class LanguageSoapService {
     }
 
     @WebMethod
-    public String insert(LanguageDto languageDto) {
+    public String insertLanguage(LanguageDto languageDto) {
 
         try {
             languageServices.insert(languageDto);
@@ -43,7 +43,7 @@ public class LanguageSoapService {
     }
 
     @WebMethod
-    public LanguageDto update(LanguageDto languageDto) {
+    public LanguageDto updateLanguage(LanguageDto languageDto) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(languageDto.getId()));
 
         if (optionalLanguage.isPresent()) {
@@ -55,7 +55,7 @@ public class LanguageSoapService {
     }
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteLanguage(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
         try {
             if (optionalLanguage.isPresent()) {

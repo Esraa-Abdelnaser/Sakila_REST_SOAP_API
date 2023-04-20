@@ -15,14 +15,14 @@ public class CategorySoapService {
 
 
     @WebMethod
-    public List<CategoryDto> getAll() {
+    public List<CategoryDto> getAllCategories() {
         List<CategoryDto> listOfCategoryDto = categoryServices.getAll();
         return listOfCategoryDto;
     }
 
 
     @WebMethod
-    public CategoryDto getById(@WebParam(name = "id") Integer id) {
+    public CategoryDto getCategoryById(@WebParam(name = "id") Integer id) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
         if (optionalCategory.isPresent()) {
             CategoryDto CategoryDto = optionalCategory.get();
@@ -34,7 +34,7 @@ public class CategorySoapService {
 
 
     @WebMethod
-    public String insert(CategoryDto CategoryDto) {
+    public String insertCategory(CategoryDto CategoryDto) {
 
         try {
             categoryServices.insert(CategoryDto);
@@ -46,7 +46,7 @@ public class CategorySoapService {
 
 
     @WebMethod
-    public CategoryDto update(CategoryDto CategoryDto) {
+    public CategoryDto updateCategory(CategoryDto CategoryDto) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(CategoryDto.getId()));
 
         if (optionalCategory.isPresent()) {
@@ -59,7 +59,7 @@ public class CategorySoapService {
 
 
     @WebMethod
-    public String delete(@WebParam(name = "id") Integer id) {
+    public String deleteCategory(@WebParam(name = "id") Integer id) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
         try {
             if (optionalCategory.isPresent()) {

@@ -36,12 +36,14 @@ public class PaymentServicesImpl implements PaymentServices {
     @Override
     public void insert(PaymentDto paymentDto) {
         paymentDto.setLastUpdate(Instant.now());
+        paymentDto.setPaymentDate(Instant.now());
         paymentRepo.insert(mapper.toEntity(paymentDto));
     }
 
     @Override
     public void update(PaymentDto paymentDto) {
         paymentDto.setLastUpdate(Instant.now());
+        paymentDto.setPaymentDate(Instant.now());
         paymentRepo.update(mapper.toEntity(paymentDto));
     }
 

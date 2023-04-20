@@ -36,12 +36,16 @@ public class RentalServicesImpl implements RentalServices {
     @Override
     public void insert(RentalDto rentalDto) {
         rentalDto.setLastUpdate(Instant.now());
+        rentalDto.setRentalDate(Instant.now());
+        rentalDto.setReturnDate(Instant.now());
         rentalRepo.insert(mapper.toEntity(rentalDto));
     }
 
     @Override
     public void update(RentalDto rentalDto) {
         rentalDto.setLastUpdate(Instant.now());
+        rentalDto.setRentalDate(Instant.now());
+        rentalDto.setReturnDate(Instant.now());
         rentalRepo.update(mapper.toEntity(rentalDto));
     }
 

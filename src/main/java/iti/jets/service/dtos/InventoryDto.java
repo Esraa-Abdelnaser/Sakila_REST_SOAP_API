@@ -29,7 +29,6 @@ public class InventoryDto implements Serializable {
 //    @NotNull
 //    private StoreDto store;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

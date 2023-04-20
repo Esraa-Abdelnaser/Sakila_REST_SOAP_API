@@ -27,7 +27,6 @@ public class CountryDto implements Serializable {
     @NotNull
     private String country;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

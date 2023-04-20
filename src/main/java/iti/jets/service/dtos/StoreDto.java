@@ -22,7 +22,6 @@ public class StoreDto implements Serializable {
 
     private Integer id;
 
-    @NotNull
     private Instant lastUpdate;
 
 //    @NotNull

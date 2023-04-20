@@ -26,7 +26,6 @@ public class CategoryDto implements Serializable {
     @NotNull
     private String name;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<FilmCategoryDto> filmCategoryList;

@@ -27,7 +27,6 @@ public class LanguageDto implements Serializable {
     @NotNull
     private String name;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

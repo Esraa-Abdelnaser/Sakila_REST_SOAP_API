@@ -22,7 +22,6 @@ public class RentalDto implements Serializable {
 
     private Integer id;
 
-    @NotNull
     private Instant rentalDate;
 
     @NotNull
@@ -36,7 +35,6 @@ public class RentalDto implements Serializable {
     @NotNull
     private StaffDto staff;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

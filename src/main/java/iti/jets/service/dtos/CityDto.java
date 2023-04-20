@@ -30,7 +30,6 @@ public class CityDto implements Serializable {
     @NotNull
     private CountryDto country;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

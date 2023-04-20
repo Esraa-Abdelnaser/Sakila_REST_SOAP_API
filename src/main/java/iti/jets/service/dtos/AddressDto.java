@@ -40,7 +40,6 @@ public class AddressDto implements Serializable {
     @NotNull
     private String phone;
 
-    @NotNull
     private Instant lastUpdate;
 
     private byte[] location;

@@ -52,7 +52,6 @@ public class StaffDto implements Serializable {
     @Size(max = 40)
     private String password;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

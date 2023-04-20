@@ -23,7 +23,6 @@ public class FilmCategoryDto implements Serializable {
 
     private FilmCategoryId id;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

@@ -54,7 +54,6 @@ public class FilmDto implements Serializable {
     @Size(max = 54)
     private String specialFeatures;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<FilmCategoryDto> filmCategoryList;

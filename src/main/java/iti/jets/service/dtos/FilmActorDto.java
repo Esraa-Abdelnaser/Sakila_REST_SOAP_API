@@ -23,7 +23,6 @@ public class FilmActorDto implements Serializable {
 
     private FilmActorId id;
 
-    @NotNull
     private Instant lastUpdate;
 
     private List<Link> links;

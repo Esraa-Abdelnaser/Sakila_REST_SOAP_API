@@ -43,7 +43,6 @@ public class CustomerDto implements Serializable {
     @NotNull
     private Boolean active = false;
 
-    @NotNull
     private Instant createDate;
 
     private Instant lastUpdate;

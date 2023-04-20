@@ -33,7 +33,6 @@ public class PaymentDto implements Serializable {
     @NotNull
     private BigDecimal amount;
 
-    @NotNull
     private Instant paymentDate;
 
     private Instant lastUpdate;

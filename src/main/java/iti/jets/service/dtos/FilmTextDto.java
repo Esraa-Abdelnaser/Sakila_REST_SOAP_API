@@ -23,7 +23,6 @@ public class FilmTextDto implements Serializable {
     private Integer id;
 
     @Size(max = 255)
-    @NotNull
     private String title;
 
     private String description;

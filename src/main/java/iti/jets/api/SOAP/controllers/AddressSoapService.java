@@ -14,18 +14,18 @@ public class AddressSoapService {
     private AddressServicesImpl addressServices = new AddressServicesImpl();
 
     @WebMethod
-    public String getAll() {
-//        List<AddressDto> listOfAddressDto = addressServices.getAll();
-        return "hello ziad";
+    public List<AddressDto> getAll() {
+        List<AddressDto> listOfAddressDto = addressServices.getAll();
+        return listOfAddressDto;
     }
 
     @WebMethod
-    public String getById(@WebParam(name = "id") Integer id) {
+    public AddressDto getById(@WebParam(name = "id") Integer id) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(id));
 
         if (optionalAddress.isPresent()) {
             AddressDto addressDto = optionalAddress.get();
-            return "hello ziad";
+            return addressDto;
         } else {
             return null;
         }
@@ -43,12 +43,12 @@ public class AddressSoapService {
     }
 
     @WebMethod
-    public String update(AddressDto addressDto) {
+    public AddressDto update(AddressDto addressDto) {
         Optional<AddressDto> optionalAddress = Optional.ofNullable(addressServices.getById(addressDto.getId()));
 
         if (optionalAddress.isPresent()) {
             addressServices.update(addressDto);
-            return "hi ziad";
+            return addressDto;
         } else {
             return null;
         }

@@ -100,7 +100,7 @@ the transport protocol and XML as the data format.
 
 The Sakila API provides a convenient way to access the Sakila database using RESTful and SOAP interfaces. The API is
 easy to use and can be integrated with a wide range of HTTP clients and programming languages. If you have any questions
-or issues with the API, please contact us at support@example.com.
+or issues with the API.
 
 ## Run with Maven
 

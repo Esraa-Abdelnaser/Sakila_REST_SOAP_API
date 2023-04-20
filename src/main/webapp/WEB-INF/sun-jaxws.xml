@@ -19,6 +19,7 @@
             name="cityService"
             implementation="iti.jets.api.SOAP.controllers.CitySoapService"
             url-pattern="/ws/cityService"/>
+
     <endpoint
             name="countryService"
             implementation="iti.jets.api.SOAP.controllers.CountrySoapService"

@@ -101,6 +101,12 @@ The Sakila API provides a convenient way to access the Sakila database using RES
 easy to use and can be integrated with a wide range of HTTP clients and programming languages. If you have any questions
 or issues with the API.
 
+## Database Schema
+
+<p align="center">
+  <img src="src/main/resources/imgs/sakila-schema.png" title="erd">
+</p>
+
 ## Run with Maven
 
 Clone the project

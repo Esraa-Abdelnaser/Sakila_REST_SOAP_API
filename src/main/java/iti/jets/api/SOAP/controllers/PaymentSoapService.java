@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.PaymentDto;
 import iti.jets.service.impls.PaymentServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class PaymentSoapService {
     private PaymentServicesImpl paymentServices = new PaymentServicesImpl();
 
+    @WebMethod
     public List<PaymentDto> getAll() {
         List<PaymentDto> listOfPaymentDto = paymentServices.getAll();
         return listOfPaymentDto;
     }
 
+    @WebMethod
     public PaymentDto getById(@WebParam(name = "id") Integer id) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(id));
 
@@ -28,6 +31,7 @@ public class PaymentSoapService {
         }
     }
 
+    @WebMethod
     public String insert(PaymentDto paymentDto) {
 
         try {
@@ -38,6 +42,7 @@ public class PaymentSoapService {
         }
     }
 
+    @WebMethod
     public PaymentDto update(PaymentDto paymentDto) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(paymentDto.getId()));
 
@@ -49,6 +54,7 @@ public class PaymentSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<PaymentDto> optionalPayment = Optional.ofNullable(paymentServices.getById(id));
         try {

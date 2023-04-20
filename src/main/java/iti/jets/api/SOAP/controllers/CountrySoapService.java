@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.CountryDto;
 import iti.jets.service.impls.CountryServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class CountrySoapService {
     private CountryServicesImpl countryServices = new CountryServicesImpl();
 
+    @WebMethod
     public List<CountryDto> getAll() {
         List<CountryDto> listOfCountryDto = countryServices.getAll();
         return listOfCountryDto;
     }
 
+    @WebMethod
     public CountryDto getById(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
 
@@ -28,6 +31,7 @@ public class CountrySoapService {
         }
     }
 
+    @WebMethod
     public String insert(CountryDto countryDto) {
 
         try {
@@ -38,6 +42,7 @@ public class CountrySoapService {
         }
     }
 
+    @WebMethod
     public CountryDto update(CountryDto countryDto) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(countryDto.getId()));
 
@@ -49,6 +54,7 @@ public class CountrySoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<CountryDto> optionalCountry = Optional.ofNullable(countryServices.getById(id));
         try {

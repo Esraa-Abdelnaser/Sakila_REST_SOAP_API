@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.LanguageDto;
 import iti.jets.service.impls.LanguageServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class LanguageSoapService {
     private LanguageServicesImpl languageServices = new LanguageServicesImpl();
 
+    @WebMethod
     public List<LanguageDto> getAll() {
         List<LanguageDto> listOfLanguageDto = languageServices.getAll();
         return listOfLanguageDto;
     }
 
+    @WebMethod
     public LanguageDto getById(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
 
@@ -28,6 +31,7 @@ public class LanguageSoapService {
         }
     }
 
+    @WebMethod
     public String insert(LanguageDto languageDto) {
 
         try {
@@ -38,6 +42,7 @@ public class LanguageSoapService {
         }
     }
 
+    @WebMethod
     public LanguageDto update(LanguageDto languageDto) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(languageDto.getId()));
 
@@ -49,6 +54,7 @@ public class LanguageSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<LanguageDto> optionalLanguage = Optional.ofNullable(languageServices.getById(id));
         try {

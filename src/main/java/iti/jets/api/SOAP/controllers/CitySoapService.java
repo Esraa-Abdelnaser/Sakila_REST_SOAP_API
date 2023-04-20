@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.CityDto;
 import iti.jets.service.impls.CityServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class CitySoapService {
     private CityServicesImpl cityServices = new CityServicesImpl();
 
+    @WebMethod
     public List<CityDto> getAll() {
         List<CityDto> listOfCityDto = cityServices.getAll();
         return listOfCityDto;
     }
 
+    @WebMethod
     public CityDto getById(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
 
@@ -28,6 +31,7 @@ public class CitySoapService {
         }
     }
 
+    @WebMethod
     public String insert(CityDto cityDto) {
 
         try {
@@ -38,6 +42,7 @@ public class CitySoapService {
         }
     }
 
+    @WebMethod
     public CityDto update(CityDto cityDto) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(cityDto.getId()));
 
@@ -49,6 +54,7 @@ public class CitySoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<CityDto> optionalCity = Optional.ofNullable(cityServices.getById(id));
         try {

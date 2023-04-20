@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.RentalDto;
 import iti.jets.service.impls.RentalServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class RentalSoapService {
     private RentalServicesImpl rentalServices = new RentalServicesImpl();
 
+    @WebMethod
     public List<RentalDto> getAll() {
         List<RentalDto> listOfRentalDto = rentalServices.getAll();
         return listOfRentalDto;
     }
 
+    @WebMethod
     public RentalDto getById(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
 
@@ -28,6 +31,7 @@ public class RentalSoapService {
         }
     }
 
+    @WebMethod
     public String insert(RentalDto rentalDto) {
 
         try {
@@ -38,6 +42,7 @@ public class RentalSoapService {
         }
     }
 
+    @WebMethod
     public RentalDto update(RentalDto rentalDto) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(rentalDto.getId()));
 
@@ -49,6 +54,7 @@ public class RentalSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<RentalDto> optionalRental = Optional.ofNullable(rentalServices.getById(id));
         try {

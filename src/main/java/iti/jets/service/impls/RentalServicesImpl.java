@@ -22,8 +22,8 @@ public class RentalServicesImpl implements RentalServices {
     public List<RentalDto> getAll() {
         List<Rental> listOfRental = rentalRepo.getAll();
         List<RentalDto> listOfRentalDto = new ArrayList<>();
-        for (Rental rental : listOfRental) {
-            listOfRentalDto.add(mapper.toDto(rental));
+        for (int i = 0; i < listOfRental.size() && i < 50; i++) {
+            listOfRentalDto.add(mapper.toDto(listOfRental.get(i)));
         }
         return listOfRentalDto;
     }

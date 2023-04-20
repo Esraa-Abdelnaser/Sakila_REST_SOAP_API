@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.InventoryDto;
 import iti.jets.service.impls.InventoryServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class InventorySoapService {
     private InventoryServicesImpl inventoryServices = new InventoryServicesImpl();
 
+    @WebMethod
     public List<InventoryDto> getAll() {
         List<InventoryDto> listOfInventoryDto = inventoryServices.getAll();
         return listOfInventoryDto;
     }
 
+    @WebMethod
     public InventoryDto getById(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
 
@@ -28,6 +31,7 @@ public class InventorySoapService {
         }
     }
 
+    @WebMethod
     public String insert(InventoryDto inventoryDto) {
 
         try {
@@ -38,6 +42,7 @@ public class InventorySoapService {
         }
     }
 
+    @WebMethod
     public InventoryDto update(InventoryDto inventoryDto) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(inventoryDto.getId()));
 
@@ -49,6 +54,7 @@ public class InventorySoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<InventoryDto> optionalInventory = Optional.ofNullable(inventoryServices.getById(id));
         try {

@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.CustomerDto;
 import iti.jets.service.impls.CustomerServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -13,11 +14,13 @@ public class CustomerSoapService {
 
     private CustomerServicesImpl customerServices = new CustomerServicesImpl();
 
+    @WebMethod
     public List<CustomerDto> getAll() {
         List<CustomerDto> listOfCustomerDto = customerServices.getAll();
         return listOfCustomerDto;
     }
 
+    @WebMethod
     public CustomerDto getById(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
 
@@ -29,6 +32,7 @@ public class CustomerSoapService {
         }
     }
 
+    @WebMethod
     public String insert(CustomerDto customerDto) {
 
         try {
@@ -39,6 +43,7 @@ public class CustomerSoapService {
         }
     }
 
+    @WebMethod
     public CustomerDto update(CustomerDto customerDto) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(customerDto.getId()));
 
@@ -50,6 +55,7 @@ public class CustomerSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<CustomerDto> optionalCustomer = Optional.ofNullable(customerServices.getById(id));
         try {

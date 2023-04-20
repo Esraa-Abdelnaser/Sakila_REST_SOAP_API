@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.CategoryDto;
 import iti.jets.service.impls.CategoryServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -13,12 +14,14 @@ public class CategorySoapService {
     private CategoryServicesImpl categoryServices = new CategoryServicesImpl();
 
 
+    @WebMethod
     public List<CategoryDto> getAll() {
         List<CategoryDto> listOfCategoryDto = categoryServices.getAll();
         return listOfCategoryDto;
     }
 
 
+    @WebMethod
     public CategoryDto getById(@WebParam(name = "id") Integer id) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
         if (optionalCategory.isPresent()) {
@@ -30,6 +33,7 @@ public class CategorySoapService {
     }
 
 
+    @WebMethod
     public String insert(CategoryDto CategoryDto) {
 
         try {
@@ -41,6 +45,7 @@ public class CategorySoapService {
     }
 
 
+    @WebMethod
     public CategoryDto update(CategoryDto CategoryDto) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(CategoryDto.getId()));
 
@@ -53,6 +58,7 @@ public class CategorySoapService {
     }
 
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<CategoryDto> optionalCategory = Optional.ofNullable(categoryServices.getById(id));
         try {

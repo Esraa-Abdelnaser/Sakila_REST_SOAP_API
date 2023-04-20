@@ -36,12 +36,14 @@ public class CustomerServicesImpl implements CustomerServices {
     @Override
     public void insert(CustomerDto customerDto) {
         customerDto.setLastUpdate(Instant.now());
+        customerDto.setCreateDate(Instant.now());
         customerRepo.insert(mapper.toEntity(customerDto));
     }
 
     @Override
     public void update(CustomerDto customerDto) {
         customerDto.setLastUpdate(Instant.now());
+        customerDto.setCreateDate(Instant.now());
         customerRepo.update(mapper.toEntity(customerDto));
     }
 

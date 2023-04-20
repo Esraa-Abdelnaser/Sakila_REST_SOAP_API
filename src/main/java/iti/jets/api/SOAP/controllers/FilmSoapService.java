@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.FilmDto;
 import iti.jets.service.impls.FilmServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class FilmSoapService {
     private FilmServicesImpl filmServices = new FilmServicesImpl();
 
+    @WebMethod
     public List<FilmDto> getAll() {
         List<FilmDto> listOfFilmDto = filmServices.getAll();
         return listOfFilmDto;
     }
 
+    @WebMethod
     public FilmDto getById(@WebParam(name = "id") Integer id) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(id));
 
@@ -28,6 +31,7 @@ public class FilmSoapService {
         }
     }
 
+    @WebMethod
     public String insert(FilmDto filmDto) {
 
         try {
@@ -38,6 +42,7 @@ public class FilmSoapService {
         }
     }
 
+    @WebMethod
     public FilmDto update(FilmDto filmDto) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(filmDto.getId()));
 
@@ -49,6 +54,7 @@ public class FilmSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<FilmDto> optionalFilm = Optional.ofNullable(filmServices.getById(id));
         try {

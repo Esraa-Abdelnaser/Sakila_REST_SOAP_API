@@ -22,8 +22,8 @@ public class PaymentServicesImpl implements PaymentServices {
     public List<PaymentDto> getAll() {
         List<Payment> listOfPayment = paymentRepo.getAll();
         List<PaymentDto> listOfPaymentDto = new ArrayList<>();
-        for (Payment payment : listOfPayment) {
-            listOfPaymentDto.add(mapper.toDto(payment));
+        for (int i = 0; i < listOfPayment.size() && i < 50; i++) {
+            listOfPaymentDto.add(mapper.toDto(listOfPayment.get(i)));
         }
         return listOfPaymentDto;
     }

@@ -2,6 +2,7 @@ package iti.jets.api.SOAP.controllers;
 
 import iti.jets.service.dtos.ActorDto;
 import iti.jets.service.impls.ActorServicesImpl;
+import jakarta.jws.WebMethod;
 import jakarta.jws.WebParam;
 import jakarta.jws.WebService;
 
@@ -12,11 +13,13 @@ import java.util.Optional;
 public class ActorSoapService {
     private ActorServicesImpl actorServices = new ActorServicesImpl();
 
+    @WebMethod
     public List<ActorDto> getAll() {
         List<ActorDto> listOfActorDto = actorServices.getAll();
         return listOfActorDto;
     }
 
+    @WebMethod
     public ActorDto getById(@WebParam(name = "id") Integer id) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
         if (optionalActor.isPresent()) {
@@ -27,6 +30,7 @@ public class ActorSoapService {
         }
     }
 
+    @WebMethod
     public String insert(ActorDto actorDto) {
 
         try {
@@ -37,6 +41,7 @@ public class ActorSoapService {
         }
     }
 
+    @WebMethod
     public ActorDto update(ActorDto actorDto) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(actorDto.getId()));
         if (optionalActor.isPresent()) {
@@ -47,6 +52,7 @@ public class ActorSoapService {
         }
     }
 
+    @WebMethod
     public String delete(@WebParam(name = "id") Integer id) {
         Optional<ActorDto> optionalActor = Optional.ofNullable(actorServices.getById(id));
         try {

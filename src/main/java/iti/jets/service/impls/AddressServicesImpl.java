@@ -36,12 +36,14 @@ public class AddressServicesImpl implements AddressServices {
     @Override
     public void insert(AddressDto addressDto) {
         addressDto.setLastUpdate(Instant.now());
+        addressDto.setLocation(location);
         addressRepo.insert(mapper.toEntity(addressDto));
     }
 
     @Override
     public void update(AddressDto addressDto) {
         addressDto.setLastUpdate(Instant.now());
+        addressDto.setLocation(location);
         addressRepo.update(mapper.toEntity(addressDto));
     }
 
@@ -50,4 +52,32 @@ public class AddressServicesImpl implements AddressServices {
 
         addressRepo.delete(addressRepo.getById(addressDto.getId()));
     }
+
+    byte location[] = new byte[]{
+            0,
+            0,
+            0,
+            0,
+            1,
+            1,
+            0,
+            0,
+            0,
+            62,
+            10,
+            50,
+            93,
+            99,
+            52,
+            92,
+            -64,
+            118,
+            31,
+            -37,
+            -115,
+            -103,
+            -39,
+            72,
+            64
+    };
 }

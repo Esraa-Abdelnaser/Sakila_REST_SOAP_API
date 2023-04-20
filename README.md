@@ -10,7 +10,7 @@ database.
 
 [Postman SOAP API](https://documenter.getpostman.com/view/26735340/2s93Y3uftt)
 
-[SOAP-UI project wsdl] (https://github.com/Esraa-Abdelnaser/Sakila_REST_SOAP_API/blob/main/wsdl_soapui-project.xml)
+[SOAP-UI project wsdl](https://github.com/Esraa-Abdelnaser/Sakila_REST_SOAP_API/blob/main/wsdl_soapui-project.xml)
 ## Technologies used
 
 - JAX-RS (Jersey)

@@ -173,12 +173,20 @@
             <version>1.5.3.Final</version>
         </dependency>
 
+        <!--                <dependency>-->
+        <!--                    <groupId>javax</groupId>-->
+        <!--                    <artifactId>javaee-api</artifactId>-->
+        <!--                    <version>8.0</version>-->
+        <!--                    <scope>provided</scope>-->
+        <!--                </dependency>-->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-api</artifactId>
-            <version>8.0</version>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-api</artifactId>
+            <version>8.0.0</version>
             <scope>provided</scope>
         </dependency>
+
+
         <dependency>
             <groupId>jakarta.xml.ws</groupId>
             <artifactId>jakarta.xml.ws-api</artifactId>

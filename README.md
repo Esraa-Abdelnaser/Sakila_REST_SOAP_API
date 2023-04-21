@@ -38,22 +38,22 @@ following HTTP methods:
 
 ## Endpoints
 
-| Endpoint     | Resource          
-|:-------------|:------------------ 
-| `/actor`     | ActorResource     
-| `/address`   | AddressResource   
-| `/category`  | CategoryResource  
-| `/city`      | CityResource      
-| `/country`   | CountryResource   
-| `/customer`  | CustomerResource  
-| `/film`      | FilmResource      
-| `/filmText`  | FilmTextResource  
-| `/inventory` | InventoryResource 
-| `/language`  | LanguageResource  
-| `/payment`   | PaymentResource   
-| `/rental`    | RentalResource    
-| `/staff`     | StaffResource     
-| `/store`     | StoreResource     
+| Endpoint     | Resource          |
+|:-------------|:------------------|
+| `/actor`     | ActorResource     |
+| `/address`   | AddressResource   |
+| `/category`  | CategoryResource  |
+| `/city`      | CityResource      |
+| `/country`   | CountryResource   |
+| `/customer`  | CustomerResource  |
+| `/film`      | FilmResource      |
+| `/filmText`  | FilmTextResource  |
+| `/inventory` | InventoryResource |
+| `/language`  | LanguageResource  |
+| `/payment`   | PaymentResource   |
+| `/rental`    | RentalResource    |
+| `/staff`     | StaffResource     |
+| `/store`     | StoreResource     |
 
 To retrieve information about all films, you can send a GET request to the /films endpoint. To retrieve information
 about a specific film, you can send a GET request to the /film/{id} endpoint, where {id} is the ID of the film.
@@ -78,22 +78,22 @@ the transport protocol and XML as the data format.
 
 ## Endpoints
 
-| Endpoint               | Service          
-|:-----------------------|:----------------- 
-| `/ws/actorService`     | ActorService     
-| `/ws/addressService`   | AddressService   
-| `/ws/categoryService`  | CategoryService  
-| `/ws/cityService`      | CityService      
-| `/ws/countryService`   | CountryService   
-| `/ws/customerService`  | CustomerService  
-| `/ws/filmService`      | FilmService      
-| `/ws/filmTextService`  | FilmTextService  
-| `/ws/inventoryService` | InventoryService 
-| `/ws/languageService`  | LanguageService  
-| `/ws/paymentService`   | PaymentService   
-| `/ws/rentalService`    | RentalService    
-| `/ws/staffService`     | StaffService     
-| `/ws/storeService`     | StoreService     
+| Endpoint               | Service          |
+|:-----------------------|:-----------------|
+| `/ws/actorService`     | ActorService     |
+| `/ws/addressService`   | AddressService   |
+| `/ws/categoryService`  | CategoryService  |
+| `/ws/cityService`      | CityService      |
+| `/ws/countryService`   | CountryService   |
+| `/ws/customerService`  | CustomerService  |
+| `/ws/filmService`      | FilmService      |
+| `/ws/filmTextService`  | FilmTextService  |
+| `/ws/inventoryService` | InventoryService |
+| `/ws/languageService`  | LanguageService  |
+| `/ws/paymentService`   | PaymentService   |
+| `/ws/rentalService`    | RentalService    |
+| `/ws/staffService`     | StaffService     |
+| `/ws/storeService`     | StoreService     |
 
 ## Conclusion
 

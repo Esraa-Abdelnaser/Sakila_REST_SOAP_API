@@ -10,11 +10,11 @@ database.
 
 [Postman SOAP API](https://documenter.getpostman.com/view/26735340/2s93Y3uftt)
 
-[SOAP-UI project wsdl](https://github.com/Esraa-Abdelnaser/Sakila_REST_SOAP_API/blob/main/wsdl_soapui-project.xml)
+[SOAP-UI project WSDL](https://github.com/Esraa-Abdelnaser/Sakila_REST_SOAP_API/blob/main/wsdl_soapui-project.xml)
 ## Technologies used
 
 - JAX-RS (Jersey)
-- JAX-WS
+- JAX-WS (Metro)
 - Maven
 - Map struct
 - Lombok
@@ -28,7 +28,7 @@ database.
 ## REST API
 
 The REST API provides endpoints for accessing the Sakila database using HTTP requests. The endpoints are organized
-around resources such as films, actors, and customers. Each resource has a unique URI, and the API supports the
+around resources such as film, actor, and customer. Each resource has a unique URI, and the API supports the
 following HTTP methods:
 
 - GET: retrieve a resource or a collection of resources
@@ -56,19 +56,19 @@ following HTTP methods:
 | `/store`     | StoreResource     
 
 To retrieve information about all films, you can send a GET request to the /films endpoint. To retrieve information
-about a specific film, you can send a GET request to the /films/{id} endpoint, where {id} is the ID of the film.
+about a specific film, you can send a GET request to the /film/{id} endpoint, where {id} is the ID of the film.
 Creating a new resource with POST
 
 To create a new resource, send a POST request to the corresponding endpoint with the resource data in the request body.
-For example, to create a new film, send a POST request to the /films endpoint with the film details in the request body.
+For example, to create a new film, send a POST request to the /film endpoint with the film details in the request body.
 
 To update an existing resource, send a PUT request to the corresponding endpoint with the updated resource data in the
 request body.
-For example, to update an existing film, send a PUT request to the /films/{id} endpoint, where {id} is the ID of the
+For example, to update an existing film, send a PUT request to the /film endpoint, where {id} is the ID of the
 film to be updated, with the updated film details in the request body.
 
 To delete a resource, send a DELETE request to the corresponding endpoint with the ID of the resource to be deleted.
-For example, to delete an existing film, send a DELETE request to the /films/{id} endpoint, where {id} is the ID of the
+For example, to delete an existing film, send a DELETE request to the /film/{id} endpoint, where {id} is the ID of the
 film to be deleted.
 
 ## SOAP API
@@ -98,8 +98,7 @@ the transport protocol and XML as the data format.
 ## Conclusion
 
 The Sakila API provides a convenient way to access the Sakila database using RESTful and SOAP interfaces. The API is
-easy to use and can be integrated with a wide range of HTTP clients and programming languages. If you have any questions
-or issues with the API.
+easy to use and can be integrated with a wide range of HTTP clients and programming languages.
 
 ## Database Schema
 
